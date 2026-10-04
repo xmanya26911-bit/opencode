@@ -240,6 +240,7 @@ function McpMenu(props: ServiceMenuProps) {
               const status = server().status.status
               if (status === "failed") return ctx.t("failed")
               if (status === "pending") return ctx.t("connecting")
+              if (status === "idle") return ctx.t("idle")
               if (status === "needs_auth") return ctx.t("needsAuth")
               return undefined
             }

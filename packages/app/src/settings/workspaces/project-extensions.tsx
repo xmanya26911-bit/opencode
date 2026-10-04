@@ -236,9 +236,12 @@ export const ProjectSettingsExtensions: Component<{
       .filter((name) => !shared.has(name))
       .sort()
   })
-  const mcpEnabled = (name: string) =>
-    data.location.mcp.server.list({ directory: directorySDK().directory })?.find((server) => server.name === name)
-      ?.status.status === "connected"
+  const mcpEnabled = (name: string) => {
+    const status = data.location.mcp.server
+      .list({ directory: directorySDK().directory })
+      ?.find((server) => server.name === name)?.status.status
+    return status === "connected" || status === "idle"
+  }
 
   const [globalPluginList] = createResource(
     () => serverSDK.connection.status() === "connected",
