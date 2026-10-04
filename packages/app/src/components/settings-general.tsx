@@ -28,6 +28,7 @@ import {
   useSettings,
 } from "@/context/settings"
 import { decode64 } from "@/utils/base64"
+import { loadCustomThemes } from "@/utils/custom-themes"
 import { playSoundById, SOUND_OPTIONS } from "@/utils/sound"
 import { ExternalLink } from "./external-link"
 import { SettingsList } from "./settings-list"
@@ -152,6 +153,12 @@ export const SettingsGeneral: Component = () => {
 
   onMount(() => {
     void theme.loadThemes()
+    if (!desktop()) return
+    const directory = dir() ?? serverSync().data.path.directory
+    if (!directory) return
+    void loadCustomThemes({ sdk: serverSdk(), directory })
+      .then((result) => theme.setCustomThemes(result))
+      .catch(() => undefined)
   })
 
   const autoOption = { id: "auto", value: "", label: language.t("settings.general.row.shell.autoDefault") }
@@ -492,6 +499,11 @@ export const SettingsGeneral: Component = () => {
             current={themeOptions().find((o) => o.id === theme.themeId())}
             value={(o) => o.id}
             label={(o) => o.name}
+            onHighlight={(option) => {
+              if (!option) return undefined
+              theme.previewTheme(option.id)
+              return () => theme.cancelPreview()
+            }}
             onSelect={(option) => {
               if (!option) return
               theme.setTheme(option.id)

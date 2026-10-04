@@ -7,6 +7,7 @@ import { TextInputV2 } from "@opencode-ai/ui/v2/text-input-v2"
 import { useDialog } from "@opencode-ai/ui/context/dialog"
 import { useLanguage } from "@/context/language"
 import { usePlatform } from "@/context/platform"
+import { useServerSync } from "@/context/server-sync"
 import { useUpdaterAction } from "../updater-action"
 import { useSettings } from "@/context/settings"
 import { ExternalLink } from "../external-link"
@@ -165,6 +166,7 @@ const AppearanceSection: Component<{ controller: AppearanceSettingsController }>
             gutter={6}
             value={(option) => option.id}
             label={(option) => option.name}
+            onHighlight={props.controller.theme.highlight}
             onSelect={props.controller.theme.select}
           />
         </SettingsRowV2>
@@ -278,11 +280,17 @@ export const SettingsGeneralV2: Component<{
   const platform = usePlatform()
   const dialog = useDialog()
   const settings = useSettings()
+  const serverSync = useServerSync()
   const mobile = createMediaQuery("(max-width: 767px)")
   const updater = useUpdaterAction()
   const permissionScope = createPermissionScopeController(() => props.sessionID)
   const shell = createShellSettingsController()
-  const appearance = createAppearanceSettingsController()
+  const currentDirectory = createMemo(() =>
+    props.sessionID
+      ? serverSync().session.lineage.peek(props.sessionID)?.session.directory
+      : serverSync().data.path.directory,
+  )
+  const appearance = createAppearanceSettingsController(currentDirectory)
   const sounds = createSoundSettingsController()
   const desktop = createMemo(() => platform.platform === "desktop")
 
