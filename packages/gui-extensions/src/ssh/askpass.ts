@@ -1,5 +1,6 @@
 import { NodeSocketServer } from "@effect/platform-node"
 import { Deferred, Effect, Fiber, Predicate, Schema, Semaphore } from "effect"
+import { Socket } from "effect/socket"
 import { randomUUID } from "node:crypto"
 import { SshFailure } from "./command"
 
@@ -17,7 +18,7 @@ export const createAskpass = Effect.fn("Ssh.askpass")(function* (input: {
   const prompts = yield* Semaphore.make(1)
   const server = yield* NodeSocketServer.make({ host: "127.0.0.1", port: 0 }).pipe(Effect.mapError(SshFailure.from))
 
-  if (!Predicate.isTagged(server.address, "TcpAddress")) return yield* Effect.fail(new SshFailure("connection"))
+  if (Predicate.isTagged(server.address, "UnixPathAddress")) return yield* Effect.fail(new SshFailure("connection"))
 
   const serving = yield* server
     .run((socket) =>
@@ -25,19 +26,24 @@ export const createAskpass = Effect.fn("Ssh.askpass")(function* (input: {
         const request = yield* Deferred.make<string, SshFailure>()
         const state = { buffer: "", received: false }
 
-        const reader = yield* socket
-          .runString((chunk) => {
-            if (state.received) return Effect.fail(new SshFailure("connection"))
-            state.buffer += chunk
+        const reader = yield* Effect.gen(function* () {
+          const pull = yield* Socket.readerString(socket)
 
-            if (state.buffer.length > 16_384) return Effect.fail(new SshFailure("connection"))
+          while (true) {
+            const chunks = yield* pull
 
-            if (!state.buffer.includes("\n")) return Effect.void
-            state.received = true
+            for (const chunk of chunks) {
+              if (state.received) return yield* Effect.fail(new SshFailure("connection"))
+              state.buffer += chunk
 
-            return Deferred.succeed(request, state.buffer.trim())
-          })
-          .pipe(Effect.ensuring(Deferred.fail(request, new SshFailure("connection"))), Effect.forkScoped)
+              if (state.buffer.length > 16_384) return yield* Effect.fail(new SshFailure("connection"))
+
+              if (!state.buffer.includes("\n")) continue
+              state.received = true
+              yield* Deferred.succeed(request, state.buffer.trim())
+            }
+          }
+        }).pipe(Effect.ensuring(Deferred.fail(request, new SshFailure("connection"))), Effect.forkScoped)
 
         const message = yield* Deferred.await(request).pipe(Effect.flatMap(Schema.decodeUnknownEffect(Request)))
 
@@ -56,8 +62,8 @@ export const createAskpass = Effect.fn("Ssh.askpass")(function* (input: {
               )
               yield* input.prompt({ id, text: message.text, confirm: message.confirm })
               const value = yield* Deferred.await(response)
-              const write = yield* socket.writer
-              yield* write(JSON.stringify({ value }))
+              const writer = yield* socket.writer
+              yield* writer.write(JSON.stringify({ value }))
             }).pipe(Effect.scoped),
           )
           .pipe(Effect.raceFirst(Fiber.join(reader).pipe(Effect.andThen(Effect.fail(new SshFailure("connection"))))))

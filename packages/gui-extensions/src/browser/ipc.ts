@@ -54,7 +54,7 @@ export const BrowserPane = Ipc.define({
       input: Schema.Struct({
         binding,
         server: text(16_384),
-        session: text(256).check(Schema.isStartsWith("ses")),
+        session: text(256).check(Schema.isStartingWith("ses")),
         restore: Schema.optionalKey(Browser.State),
       }),
     },
