@@ -74,6 +74,7 @@ import { useTuiConfig } from "../../config"
 import { useClipboard } from "../../context/clipboard"
 import { nextThinkingMode, reasoningSummary, useThinkingMode, type ThinkingMode } from "../../context/thinking"
 import { getScrollAcceleration } from "../../util/scroll"
+import { navigationTargets, pickNavigationTarget, type NavigationScope } from "./navigation"
 import { collapseToolOutput } from "../../util/collapse-tool-output"
 import { usePluginRuntime } from "../../plugin/runtime"
 import { DialogRetryAction } from "../../component/dialog-retry-action"
@@ -133,6 +134,10 @@ const sessionBindingCommands = [
   "session.messages_last_user",
   "session.message.next",
   "session.message.previous",
+  "session.block.next",
+  "session.block.previous",
+  "session.landmark.next",
+  "session.landmark.previous",
   "messages.copy",
   "session.copy",
   "session.export",
@@ -418,6 +423,23 @@ export function Session() {
     const child = scroll.getChildren().find((c) => c.id === targetID)
     if (child) scroll.scrollBy(child.y - scroll.y - 1)
     dialog.clear()
+  }
+
+  // Brings the next or previous block to the top of the viewport, one row
+  // below its edge as scrollToMessage does. Past the last block the view
+  // returns to the bottom and follows new output again; before the first it
+  // goes to the top.
+  const scrollToBlock = (scope: NavigationScope, direction: "next" | "prev") => {
+    dialog.clear()
+    const targets = navigationTargets(messages(), (messageID) => sync.data.part[messageID] ?? [], scope)
+    const anchor = scroll.y + 1
+    const target = pickNavigationTarget(
+      scroll.getChildren().filter((child) => targets.has(child.id)),
+      anchor,
+      direction,
+    )
+    if (target) return scroll.scrollBy(target.y - anchor)
+    scroll.scrollTo(direction === "next" ? scroll.scrollHeight : 0)
   }
 
   function toBottom() {
@@ -872,6 +894,34 @@ export function Session() {
       category: "Session",
       hidden: true,
       run: () => scrollToMessage("prev", dialog),
+    },
+    {
+      title: "Next block",
+      value: "session.block.next",
+      category: "Session",
+      hidden: true,
+      run: () => scrollToBlock("block", "next"),
+    },
+    {
+      title: "Previous block",
+      value: "session.block.previous",
+      category: "Session",
+      hidden: true,
+      run: () => scrollToBlock("block", "prev"),
+    },
+    {
+      title: "Next landmark",
+      value: "session.landmark.next",
+      category: "Session",
+      hidden: true,
+      run: () => scrollToBlock("landmark", "next"),
+    },
+    {
+      title: "Previous landmark",
+      value: "session.landmark.previous",
+      category: "Session",
+      hidden: true,
+      run: () => scrollToBlock("landmark", "prev"),
     },
     {
       title: "Copy last assistant message",
@@ -1614,6 +1664,7 @@ function ReasoningPart(props: { last: boolean; part: ReasoningPart; message: Ass
   return (
     <Show when={content() || opaque()}>
       <box
+        id={props.part.id}
         ref={(el: BoxRenderable) => alwaysSeparate.add(el)}
         paddingLeft={3}
         marginTop={1}
@@ -1688,7 +1739,13 @@ function TextPart(props: { last: boolean; part: TextPart; message: AssistantMess
   const { theme, syntax } = useTheme()
   return (
     <Show when={props.part.text.trim()}>
-      <box ref={(el: BoxRenderable) => alwaysSeparate.add(el)} paddingLeft={3} marginTop={1} flexShrink={0}>
+      <box
+        id={props.part.id}
+        ref={(el: BoxRenderable) => alwaysSeparate.add(el)}
+        paddingLeft={3}
+        marginTop={1}
+        flexShrink={0}
+      >
         <markdown
           syntaxStyle={syntax()}
           streaming={true}
@@ -1882,6 +1939,7 @@ function InlineTool(props: {
 
   return (
     <InlineToolRow
+      id={props.part.id}
       icon={props.icon}
       iconColor={props.iconColor}
       color={fg()}
@@ -1912,6 +1970,7 @@ function InlineTool(props: {
 }
 
 export function InlineToolRow(props: {
+  id?: string
   icon: string
   iconColor?: RGBA
   color?: RGBA
@@ -1932,6 +1991,7 @@ export function InlineToolRow(props: {
 }) {
   return (
     <box
+      id={props.id}
       paddingLeft={3}
       onMouseOver={props.onMouseOver}
       onMouseOut={props.onMouseOut}
@@ -2004,6 +2064,7 @@ function BlockTool(props: {
   const error = createMemo(() => (props.part?.state.status === "error" ? props.part.state.error : undefined))
   return (
     <box
+      id={props.part?.id}
       ref={(el: BoxRenderable) => alwaysSeparate.add(el)}
       border={["left"]}
       paddingTop={1}
