@@ -46,6 +46,14 @@ const unsafeCSS = `
   background-color: var(--diffs-bg-selection-text);
 }
 
+[data-diff] [data-content],
+[data-diff] [data-content] *,
+[data-file] [data-content],
+[data-file] [data-content] * {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
 [data-indicators='bars'] [data-column-number][data-line-type='change-addition']::before,
 [data-indicators='bars'] [data-column-number][data-line-type='change-deletion']::before {
   width: 2px;

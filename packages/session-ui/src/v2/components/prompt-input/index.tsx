@@ -178,7 +178,10 @@ export function PromptInputV2(props: PromptInputV2Props) {
               }
             }}
             onKeyUp={updateCursor}
-            onPointerUp={updateCursor}
+            onPointerUp={(event) => {
+              if (event.button !== 0) return
+              updateCursor()
+            }}
             onPaste={props.controller.onPaste}
             onFocus={() => props.controller.dispatch({ type: "focus.editor" })}
           />
