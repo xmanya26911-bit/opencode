@@ -22,6 +22,7 @@ describe("pairing routes", () => {
       { url: "https://opencode.example.com", kind: "custom" },
       { url: "http://192.168.10.248:49374", kind: "local" },
       { url: "http://[fd12:3456::1]:49374", kind: "local" },
+      { url: "http://169.254.10.2:49374", kind: "local" },
       { url: "http://100.87.251.43:49374", kind: "vpn" },
       { url: "http://[fd7a:115c:a1e0::901:fb9d]:49374", kind: "vpn" },
       { url: "http://203.0.113.4:49374", kind: "other" },

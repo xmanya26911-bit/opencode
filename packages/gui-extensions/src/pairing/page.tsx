@@ -42,6 +42,8 @@ function SettingsPairing(props: { client: Client }) {
   const local = useQuery(() => ({
     queryKey: [ctx.id, "local"],
     queryFn: (input) => props.client.info({ signal: input.signal }),
+    // Asks again each time the page opens: the guidance below tells the user to change the hostname and reopen Pairing.
+    gcTime: 0,
   }))
 
   // Reading pending query data would suspend the entire settings surface.
@@ -52,6 +54,7 @@ function SettingsPairing(props: { client: Client }) {
   const screenActive = useQuery(() => ({
     queryKey: [ctx.id, "screen-active"],
     queryFn: () => props.client.screenActive(),
+    gcTime: 0,
   }))
 
   const screenActivity = useMutation(() => ({
@@ -295,12 +298,21 @@ function DialogPairing(props: {
     },
   }))
 
+  // "Copied" describes the link on screen, so it ends when the user switches to another link.
+  const forgetCopy = () => {
+    clearTimeout(copied.timeout)
+    copy.reset()
+  }
+
   const refresh = () => (
     <button
       type="button"
       class="rounded-[4px] px-1 text-12-regular leading-[var(--line-height-compact)] text-v2-text-text-muted underline-offset-2 hover:text-v2-text-text-base hover:underline focus-visible:underline focus-visible:outline-none disabled:opacity-50"
       disabled={code.isFetching}
-      onClick={() => void code.refetch()}
+      onClick={() => {
+        forgetCopy()
+        void code.refetch()
+      }}
     >
       {ctx.t("refresh")}
     </button>
@@ -337,7 +349,15 @@ function DialogPairing(props: {
             </Show>
           }
         >
-          <RadioGroup hideLabel label={ctx.t("routes")} value={route()?.url} onChange={props.onSelect}>
+          <RadioGroup
+            hideLabel
+            label={ctx.t("routes")}
+            value={route()?.url}
+            onChange={(url) => {
+              forgetCopy()
+              props.onSelect(url)
+            }}
+          >
             <For each={props.routes()}>
               {(item) => (
                 <RadioItem

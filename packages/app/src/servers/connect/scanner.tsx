@@ -17,15 +17,16 @@ export function PairingScanner(props: { redeem: RedeemPairing; onScan: (link: st
   video.muted = true
 
   onMount(() => {
-    // A code that failed usually stays in view, so skip it instead of redeeming it again on every frame.
-    const rejected = new Set<string>()
+    // A code that failed usually stays in view, so skip it for a few seconds instead of redeeming it on every frame.
+    // It is tried again afterwards: a code the server could not be reached for still works once the network is back.
+    const rejected = new Map<string, number>()
     const scan = { disposed: false }
 
     // QrScanner hides detached videos, so initialize only after this preview is mounted.
     const scanner = new QrScanner(
       video,
       (result) => {
-        if (state.redeeming || rejected.has(result.data)) return
+        if (state.redeeming || Date.now() < (rejected.get(result.data) ?? 0)) return
         setState({ redeeming: true, error: "" })
         void props.redeem(result.data).then((redeemed) => {
           if (scan.disposed) return
@@ -38,7 +39,7 @@ export function PairingScanner(props: { redeem: RedeemPairing; onScan: (link: st
             return
           }
 
-          rejected.add(result.data)
+          rejected.set(result.data, Date.now() + 3000)
           setState("error", redeemed?.error ?? language.t("server.connect.scan.invalid"))
         })
       },
