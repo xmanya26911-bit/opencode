@@ -1,4 +1,5 @@
 import { createResource } from "solid-js"
+import { useDialog } from "@opencode/ui/context/dialog"
 import { useLanguage } from "@/runtime/i18n/language"
 import { usePlatform } from "@/runtime/platform/platform"
 import { ExternalLink } from "@/runtime/platform/external-link"
@@ -25,21 +26,26 @@ const writers = [
   "simonklee",
   "arvsrn",
 ] as const
+
 const illustrators = ["usrnk1", "ludvigrask_", "arvsrn", "iamdavidhill"] as const
 
 export function SettingsAbout(props: { active: boolean }) {
   const language = useLanguage()
   const platform = usePlatform()
+  const dialog = useDialog()
+
   const [otherContributors] = createResource(
     () => props.active || undefined,
     () => loadOtherContributorCount(platform.fetch ?? fetch),
     { initialValue: FALLBACK_OTHER_CONTRIBUTORS },
   )
+
   const credit = (name: string) => (
     <bdi dir="ltr">
       <ExternalLink href={profile(name)}>{name}</ExternalLink>
     </bdi>
   )
+
   const writerCredits = () => [
     ...writers.map(credit),
     <ExternalLink href="https://github.com/anomalyco/opencode/graphs/contributors">
@@ -48,6 +54,13 @@ export function SettingsAbout(props: { active: boolean }) {
       })}
     </ExternalLink>,
   ]
+
+  const showNotices = async () => {
+    // The license texts load only when someone reads them.
+    const { default: DialogThirdPartyNotices } = await import("./notices/dialog")
+
+    void dialog.show(() => <DialogThirdPartyNotices />)
+  }
 
   return (
     <div class="settings-about-content">
@@ -86,6 +99,11 @@ export function SettingsAbout(props: { active: boolean }) {
         <p>{language.t("settings.about.description")}</p>
         <p>{language.t("settings.about.trademark")}</p>
         <p>{language.t("settings.about.typeset")}</p>
+        <p>
+          <button type="button" class="settings-about-link" onClick={() => void showNotices()}>
+            {language.t("settings.about.notices.title")}
+          </button>
+        </p>
       </div>
 
       <p>{language.t("settings.about.tagline")}</p>
@@ -100,6 +118,8 @@ export function SettingsAbout(props: { active: boolean }) {
 
 function profile(name: string) {
   if (name === "r44vcorp") return "https://github.com/R44VC0RP"
+
   if (name === "ludvigrask_") return "https://x.com/ludvigrask_"
+
   return `https://github.com/${name}`
 }
