@@ -28,6 +28,22 @@ export function pairingLink(value: string) {
   return { url: address, code }
 }
 
+// A server address typed where a pairing link was expected: a host with no path, so a bare code or a cut-off link
+// is not mistaken for a server. Paths stay allowed in the password form, where servers behind a proxy prefix live.
+export function bareServerAddress(value: string) {
+  const address = serverAddress(value)
+
+  if (!address) return
+  const url = new URL(address)
+
+  if (url.pathname !== "/") return
+
+  if (url.hostname !== "localhost" && !url.hostname.includes(".") && !url.hostname.startsWith("[") && !url.port)
+    return
+
+  return address
+}
+
 // Servers before one-time links paired with `/connect#<credentials>` or `/connect?data=<credentials>`.
 export function legacyPairingLink(value: string) {
   const url = URL.parse(value.trim())

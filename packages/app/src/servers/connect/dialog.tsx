@@ -30,7 +30,7 @@ import { useCheckServerHealth } from "@/runtime/server/health"
 import { usePlatform } from "@/runtime/platform/platform"
 import { isMixedContent } from "./browser"
 import { cameraHint, createCameraAvailability } from "./camera"
-import { pairingLink, serverAddress, type Pairing } from "./pairing"
+import { bareServerAddress, pairingLink, type Pairing } from "./pairing"
 import { useRedeemPairing } from "./redeem"
 import { ConnectMethodSwitch, type ConnectMethod } from "./method"
 import "@/settings/settings.css"
@@ -117,6 +117,7 @@ export const DialogServer: Component<{
                   form.scan.stop()
                   void camera.refetch()
                 }}
+                redeem={form.scan.redeem}
                 onScan={form.scan.complete}
               />
             </Suspense>
@@ -133,8 +134,11 @@ export const DialogServer: Component<{
               when={form.state.method() === "password"}
               fallback={
                 <div class="flex w-full min-w-0 flex-col gap-2">
-                  <label class="settings-server-dialog-label">{language.t("server.connect.link")}</label>
+                  <label for="dialog-server-link" class="settings-server-dialog-label">
+                    {language.t("server.connect.link")}
+                  </label>
                   <TextInput
+                    id="dialog-server-link"
                     type="text"
                     appearance="large"
                     class="!w-full self-stretch"
@@ -155,8 +159,11 @@ export const DialogServer: Component<{
               }
             >
               <div class="flex w-full min-w-0 flex-col gap-2">
-                <label class="settings-server-dialog-label">{language.t("dialog.server.add.url")}</label>
+                <label for="dialog-server-url" class="settings-server-dialog-label">
+                  {language.t("dialog.server.add.url")}
+                </label>
                 <TextInput
+                  id="dialog-server-url"
                   type="text"
                   appearance="large"
                   class="!w-full self-stretch"
@@ -173,8 +180,11 @@ export const DialogServer: Component<{
               </div>
             </Show>
             <div class="flex w-full min-w-0 flex-col gap-2">
-              <label class="settings-server-dialog-label">{language.t("dialog.server.add.name")}</label>
+              <label for="dialog-server-name" class="settings-server-dialog-label">
+                {language.t("dialog.server.add.name")}
+              </label>
               <TextInput
+                id="dialog-server-name"
                 type="text"
                 appearance="large"
                 class="!w-full self-stretch"
@@ -187,8 +197,11 @@ export const DialogServer: Component<{
             </div>
             <Show when={form.state.method() === "password"}>
               <div class="flex w-full min-w-0 flex-col gap-2">
-                <label class="settings-server-dialog-label">{language.t("dialog.server.add.password")}</label>
+                <label for="dialog-server-password" class="settings-server-dialog-label">
+                  {language.t("dialog.server.add.password")}
+                </label>
                 <TextInput
+                  id="dialog-server-password"
                   type="password"
                   appearance="large"
                   class="!w-full self-stretch"
@@ -261,8 +274,6 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
     scanning: boolean
     error: string
     status: boolean | undefined
-    // A redeemed link, kept so a failed connection check can retry without the spent code.
-    paired: { link: string; pairing: Pairing } | undefined
   }>({
     mode: "list",
     method: "link",
@@ -272,7 +283,6 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
     scanning: false,
     error: "",
     status: undefined,
-    paired: undefined,
   })
 
   onCleanup(healthPreview.cancel)
@@ -288,7 +298,6 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
       scanning: false,
       error: "",
       status: undefined,
-      paired: undefined,
     })
   }
 
@@ -309,29 +318,31 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
       remove: (key) => server.remove(key),
     })
 
-  // Where the form points: a scanned or pasted pairing link wins, else the address and password fields.
-  const target = async (scanned?: Pairing): Promise<Pairing | ServerConnection.HttpBase | undefined> => {
-    if (scanned) return scanned
+  // A pairing token works on every address of its server. Signing in again to the edited server keeps its address
+  // (e.g. localhost) even when the link names another one (e.g. 127.0.0.1 from opencode pair).
+  const paired = async (pairing: Pairing) => {
+    const original = store.mode === "edit" ? editing() : undefined
 
+    if (!original || original.http.url === pairing.url) return pairing
+    const http = { url: original.http.url, password: pairing.password }
+
+    return (await checkServerHealth(http)).healthy ? http : pairing
+  }
+
+  // Where the form points: a scanned or pasted pairing link wins, else the address and password fields.
+  const target = async (): Promise<ServerConnection.HttpBase | undefined> => {
     if (store.method === "link") {
-      if (store.paired?.link === store.link) return store.paired.pairing
       const redeemed = await redeem(store.link)
 
       if (redeemed && "error" in redeemed) return void setStore("error", redeemed.error)
 
-      if (!redeemed) {
-        // A bare server address belongs to the password form.
-        const address = serverAddress(store.link)
+      if (redeemed) return paired(redeemed.pairing)
+      // A server address typed here belongs to the password form.
+      const address = bareServerAddress(store.link)
 
-        if (address) return void setStore({ method: "password", link: "", values: { ...store.values, url: address } })
+      if (address) return void setStore({ method: "password", link: "", values: { ...store.values, url: address } })
 
-        return void setStore("error", language.t("server.connect.link.invalid"))
-      }
-
-      // The code is spent now, so a failed connection check retries with the token instead.
-      setStore("paired", { link: store.link, pairing: redeemed.pairing })
-
-      return redeemed.pairing
+      return void setStore("error", language.t("server.connect.link.invalid"))
     }
 
     // A pairing link pasted into the address field still pairs.
@@ -339,7 +350,7 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
 
     if (redeemed && "error" in redeemed) return void setStore("error", redeemed.error)
 
-    if (redeemed) return redeemed.pairing
+    if (redeemed) return paired(redeemed.pairing)
     const url = normalizeServerUrl(store.values.url)
 
     if (!url) return void reset()
@@ -348,8 +359,8 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
   }
 
   const request = useMutation(() => ({
-    mutationFn: async (scanned?: Pairing) => {
-      const http = await target(scanned)
+    mutationFn: async () => {
+      const http = await target()
 
       if (!http) return
       const normalized = http.url
@@ -455,13 +466,13 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
   const submit = () => {
     if (store.mode === "list" || request.isPending) return
     setStore("error", "")
-    request.mutate(undefined)
+    request.mutate()
   }
 
-  const pair = (pairing: Pairing) => {
+  const pair = (link: string) => {
     healthPreview.cancel()
-    setStore({ scanning: false, error: "" })
-    request.mutate(pairing)
+    setStore({ method: "link", link, scanning: false, error: "" })
+    request.mutate()
   }
 
   createEffect(() => {
@@ -509,6 +520,7 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
       start: () => setStore("scanning", true),
       stop: () => setStore("scanning", false),
       complete: pair,
+      redeem,
     },
     start: { add: startAdd, edit: startEdit },
     reset,

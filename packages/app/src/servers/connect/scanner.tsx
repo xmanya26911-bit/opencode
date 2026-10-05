@@ -3,13 +3,13 @@ import { onCleanup, onMount, Show } from "solid-js"
 import { createStore } from "solid-js/store"
 import { Button } from "@opencode/ui/button"
 import { useLanguage } from "@/runtime/i18n/language"
-import type { Pairing } from "./pairing"
-import { useRedeemPairing } from "./redeem"
+import type { RedeemPairing } from "./redeem"
 import "./scanner.css"
 
-export function PairingScanner(props: { onScan: (value: Pairing) => void; onCancel: () => void }) {
+// Redeems with the form's own redeem, so the form keeps the token and a failed connection check retries without the
+// spent code; the form gets back the scanned link and fills it in.
+export function PairingScanner(props: { redeem: RedeemPairing; onScan: (link: string) => void; onCancel: () => void }) {
   const language = useLanguage()
-  const redeem = useRedeemPairing()
   const [state, setState] = createStore({ error: "", ready: false, redeeming: false })
   const video = document.createElement("video")
   video.setAttribute("aria-label", language.t("server.connect.camera"))
@@ -27,13 +27,13 @@ export function PairingScanner(props: { onScan: (value: Pairing) => void; onCanc
       (result) => {
         if (state.redeeming || rejected.has(result.data)) return
         setState({ redeeming: true, error: "" })
-        void redeem(result.data).then((redeemed) => {
+        void props.redeem(result.data).then((redeemed) => {
           if (scan.disposed) return
           setState("redeeming", false)
 
           if (redeemed && "pairing" in redeemed) {
             scanner.stop()
-            props.onScan(redeemed.pairing)
+            props.onScan(result.data)
 
             return
           }

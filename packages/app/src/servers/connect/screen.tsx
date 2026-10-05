@@ -8,7 +8,7 @@ import { useLanguage } from "@/runtime/i18n/language"
 import { usePlatform } from "@/runtime/platform/platform"
 import { useCheckServerHealth } from "@/runtime/server/health"
 import { ServerConnection, useServers } from "@/runtime/server/registry"
-import { serverAddress, type Pairing } from "./pairing"
+import { bareServerAddress, serverAddress, type Pairing } from "./pairing"
 import { useRedeemPairing } from "./redeem"
 import { isMixedContent } from "./browser"
 import { cameraHint, createCameraAvailability } from "./camera"
@@ -32,8 +32,6 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
     password: string
     error: string
     scanning: boolean
-    // A redeemed link, kept so a failed connection check can retry without the spent code.
-    paired: { link: string; pairing: Pairing } | undefined
   }>({
     method: "link",
     link: "",
@@ -41,8 +39,16 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
     password: "",
     error: "",
     scanning: false,
-    paired: undefined,
   })
+
+  // A pairing token works on every address of its server. Signing in again to the server that signed out keeps its
+  // address (e.g. localhost) even when the link names another one (e.g. 127.0.0.1 from opencode pair).
+  const target = async (pairing: Pairing) => {
+    if (!props.url || props.url === pairing.url) return pairing
+    const http = { url: props.url, password: pairing.password }
+
+    return (await check(http)).healthy ? http : pairing
+  }
 
   const connect = async (http: ServerConnection.HttpBase) => {
     const result = await check(http)
@@ -68,36 +74,20 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
         : "server.connect.failed",
     )
 
-  const pairing = async () => {
-    if (state.paired?.link === state.link) return state.paired.pairing
-    const redeemed = await redeem(state.link)
-
-    if (redeemed && "error" in redeemed) return void setState("error", redeemed.error)
-
-    if (!redeemed) {
-      // A bare server address belongs to the password form.
-      const address = serverAddress(state.link)
-
-      if (address) return void setState({ method: "password", url: address, link: "", error: "" })
-
-      return void setState("error", language.t("server.connect.link.invalid"))
-    }
-
-    setState("paired", { link: state.link, pairing: redeemed.pairing })
-
-    return redeemed.pairing
-  }
-
   const request = useMutation(() => ({
-    mutationFn: async (scanned?: Pairing) => {
-      if (scanned) return connect({ url: scanned.url, password: scanned.password })
-
+    mutationFn: async () => {
       if (state.method === "link") {
-        const paired = await pairing()
+        const redeemed = await redeem(state.link)
 
-        if (paired) await connect({ url: paired.url, password: paired.password })
+        if (redeemed && "error" in redeemed) return void setState("error", redeemed.error)
 
-        return
+        if (redeemed) return connect(await target(redeemed.pairing))
+        // A server address typed here belongs to the password form.
+        const address = bareServerAddress(state.link)
+
+        if (address) return void setState({ method: "password", url: address, link: "", error: "" })
+
+        return void setState("error", language.t("server.connect.link.invalid"))
       }
 
       // A pairing link pasted into the address field still pairs.
@@ -105,7 +95,7 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
 
       if (redeemed && "error" in redeemed) return void setState("error", redeemed.error)
 
-      if (redeemed) return connect({ url: redeemed.pairing.url, password: redeemed.pairing.password })
+      if (redeemed) return connect(await target(redeemed.pairing))
       const url = serverAddress(state.url)
 
       if (!url) return void setState("error", language.t("server.connect.address.invalid"))
@@ -118,7 +108,7 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
   const submit = () => {
     if (request.isPending) return
     setState("error", "")
-    request.mutate(undefined)
+    request.mutate()
   }
 
   return (
@@ -138,13 +128,14 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
           fallback={
             <Suspense fallback={<p role="status">{language.t("server.connect.camera.starting")}</p>}>
               <PairingScanner
+                redeem={redeem}
                 onCancel={() => {
                   setState("scanning", false)
                   void camera.refetch()
                 }}
-                onScan={(scanned) => {
-                  setState({ error: "", scanning: false })
-                  request.mutate(scanned)
+                onScan={(link) => {
+                  setState({ method: "link", link, error: "", scanning: false })
+                  request.mutate()
                 }}
               />
             </Suspense>

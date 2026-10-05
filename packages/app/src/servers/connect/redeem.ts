@@ -5,19 +5,33 @@ import { legacyPairingLink, pairingLink, redeemPairingLink, type Pairing } from 
 
 export type Redemption = { readonly pairing: Pairing } | { readonly error: string }
 
+/** Redeems a pasted or scanned pairing link; resolves undefined when the value is not a pairing link at all. */
+export type RedeemPairing = (value: string) => Promise<Redemption | undefined>
+
+/** The last link a form redeemed, and the token the server returned for it. */
+type Redeemed = { link?: string; pairing?: Pairing }
+
 // Pasted and scanned links share one redeem path so every surface explains a failure the same way.
-// Resolves undefined when the value is not a pairing link at all.
-export function useRedeemPairing() {
+// Each form keeps the last token it redeemed: the code is spent, so a retry after a failed connection check reuses it.
+export function useRedeemPairing(): RedeemPairing {
   const language = useLanguage()
   const platform = usePlatform()
+  const last: Redeemed = {}
 
-  return async (value: string): Promise<Redemption | undefined> => {
+  return async (value) => {
     const link = pairingLink(value)
 
     if (!link) return legacyPairingLink(value) ? { error: language.t("server.connect.link.legacy") } : undefined
+
+    if (last.pairing && last.link === value.trim()) return { pairing: last.pairing }
     const result = await redeemPairingLink(link)
 
-    if (result.type === "paired") return { pairing: result.pairing }
+    if (result.type === "paired") {
+      last.link = value.trim()
+      last.pairing = result.pairing
+
+      return { pairing: result.pairing }
+    }
 
     if (result.type === "expired") return { error: language.t("server.connect.link.expired") }
 

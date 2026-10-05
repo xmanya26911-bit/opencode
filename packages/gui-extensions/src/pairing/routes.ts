@@ -18,7 +18,9 @@ export function pairingRoutes(urls: readonly string[], custom: string) {
     return url && kind ? [{ url: url.origin, kind }] : []
   })
 
-  const routes: PairingRoute[] = custom ? [{ url: custom, kind: "custom" }, ...advertised] : advertised
+  // The stored address is checked again on read, so a malformed stored value cannot break the page.
+  const origin = customAddress(custom)
+  const routes: PairingRoute[] = origin ? [{ url: origin, kind: "custom" }, ...advertised] : advertised
 
   return routes
     .filter((route, index) => routes.findIndex((other) => other.url === route.url) === index)

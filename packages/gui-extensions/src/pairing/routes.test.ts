@@ -28,6 +28,12 @@ describe("pairing routes", () => {
     ])
   })
 
+  test("a stored custom address that is not an HTTP origin is ignored", () => {
+    expect(pairingRoutes(["http://192.168.1.2:4096"], "not a url")).toEqual([
+      { url: "http://192.168.1.2:4096", kind: "local" },
+    ])
+  })
+
   test("a server that only listens on this computer has no route", () => {
     expect(pairingRoutes(["http://127.0.0.1:49374", "http://localhost:49374"], "")).toEqual([])
   })

@@ -59,7 +59,17 @@ function SettingsPairing(props: { client: Client }) {
     onSuccess: (_, enabled) => queryClient.setQueryData([ctx.id, "screen-active"], enabled),
   }))
 
-  const copyCommand = useMutation(() => ({ mutationFn: () => system.copy(LISTEN_COMMAND) }))
+  // "Copied" shows for two seconds after each copy.
+  const commandCopied: CopiedTimer = {}
+  onCleanup(() => clearTimeout(commandCopied.timeout))
+
+  const copyCommand = useMutation(() => ({
+    mutationFn: () => system.copy(LISTEN_COMMAND),
+    onMutate: () => clearTimeout(commandCopied.timeout),
+    onSuccess: () => {
+      commandCopied.timeout = setTimeout(() => copyCommand.reset(), 2000)
+    },
+  }))
 
   const saveCustom = () => {
     const draft = custom.draft.trim()
@@ -106,7 +116,7 @@ function SettingsPairing(props: { client: Client }) {
                             value.selected = url
                           })
                         }
-                        code={() => props.client.code()}
+                        code={(signal) => props.client.code({ signal })}
                       />
                     ))
                   }
@@ -231,7 +241,7 @@ function DialogPairing(props: {
   routes: Accessor<readonly PairingRoute[]>
   selected: Accessor<string>
   onSelect: (url: string) => void
-  code: () => Promise<{ readonly code: string; readonly expiresIn: number }>
+  code: (signal: AbortSignal) => Promise<{ readonly code: string; readonly expiresIn: number }>
 }) {
   const ctx = useExtension()
   const system = ctx.system
@@ -239,7 +249,7 @@ function DialogPairing(props: {
   // Codes are single-use, so replace the link as soon as the server forgets the current code.
   const code = useQuery(() => ({
     queryKey: [ctx.id, "code"],
-    queryFn: props.code,
+    queryFn: (input) => props.code(input.signal),
     gcTime: 0,
     refetchInterval: (query) => (query.state.data?.expiresIn ?? 60) * 1000,
   }))
@@ -282,6 +292,17 @@ function DialogPairing(props: {
     },
   }))
 
+  const refresh = () => (
+    <button
+      type="button"
+      class="rounded-[4px] px-1 text-12-regular leading-[var(--line-height-compact)] text-v2-text-text-muted underline-offset-2 hover:text-v2-text-text-base hover:underline focus-visible:underline focus-visible:outline-none disabled:opacity-50"
+      disabled={code.isFetching}
+      onClick={() => void code.refetch()}
+    >
+      {ctx.t("refresh")}
+    </button>
+  )
+
   const qr = createMemo(() => {
     const value = url()
 
@@ -302,7 +323,9 @@ function DialogPairing(props: {
             <Show when={route()}>
               {(item) => (
                 <div class="flex flex-col gap-0.5">
-                  <span class="text-[13px] font-[530] leading-[var(--line-height-compact)] text-v2-text-text-base">{ctx.t(routeLabel[item().kind])}</span>
+                  <span class="text-[13px] font-[530] leading-[var(--line-height-compact)] text-v2-text-text-base">
+                    {ctx.t(routeLabel[item().kind])}
+                  </span>
                   <span class="text-12-regular leading-[var(--line-height-compact)] text-v2-text-text-muted">
                     {ctx.t(routeDescription[item().kind])}
                   </span>
@@ -362,21 +385,18 @@ function DialogPairing(props: {
                 {ctx.t("expires", { time: countdown(remaining()) })}
               </span>
               <span aria-hidden="true">·</span>
-              <button
-                type="button"
-                class="rounded-[4px] px-1 text-v2-text-text-muted underline-offset-2 hover:text-v2-text-text-base hover:underline focus-visible:underline focus-visible:outline-none disabled:opacity-50"
-                disabled={code.isFetching}
-                onClick={() => void code.refetch()}
-              >
-                {ctx.t("refresh")}
-              </button>
+              {refresh()}
             </div>
           </div>
         </Show>
-        <Show when={code.error}>
-          <p class="text-text-danger-base" role="alert">
-            {ctx.t("error")}
-          </p>
+        {/* A failed fetch hides the link, so the way to try again stays next to the error. */}
+        <Show when={!url() && code.error}>
+          <div class="flex flex-col items-center gap-1">
+            <p class="text-text-danger-base" role="alert">
+              {ctx.t("error")}
+            </p>
+            {refresh()}
+          </div>
         </Show>
         <Show when={copy.error}>
           <p class="text-text-danger-base" role="alert">
