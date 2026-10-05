@@ -1,4 +1,4 @@
-import { appendFile, rename, writeFile } from "node:fs/promises"
+import { appendFile, rename, rm, writeFile } from "node:fs/promises"
 
 const [registration, mode, delay] = process.argv.slice(2)
 if (registration === undefined || mode === undefined) throw new Error("Missing service fixture arguments")
@@ -44,8 +44,12 @@ const handoff = {
 }
 const server = Bun.serve({
   port: 0,
-  async fetch(request) {
+  async fetch(request): Promise<Response> {
     const pathname = new URL(request.url).pathname
+    if (mode === "protocol" && pathname === "/api/experimental/persistent-pty/handoff") {
+      await writeFile(registration + ".handoff-request", "")
+      return Response.json({ handoff: null })
+    }
     if (pathname === "/api/experimental/persistent-pty/handoff" && mode === "handoff") {
       if (request.method !== "POST" || request.headers.get("authorization") !== "Basic " + btoa("opencode:private"))
         return new Response(null, { status: 401 })
@@ -55,6 +59,8 @@ const server = Bun.serve({
     if (pathname === "/api/experimental/persistent-pty/handoff" && mode === "handoff-broken")
       return new Response(null, { status: 500 })
     if (pathname !== "/api/info") return new Response(null, { status: 404 })
+    if (mode === "protocol" && (await Bun.file(registration + ".missing-health").exists()))
+      return new Response(null, { status: 404 })
     requests += 1
     if (mode === "starting") await writeFile(registration + ".status-request", "")
     if (mode === "hanging") {
@@ -85,6 +91,10 @@ const server = Bun.serve({
   },
 })
 
+// Install handlers before publishing: a test may signal as soon as the registration appears.
+process.on("SIGTERM", () => void shutdown("SIGTERM"))
+process.on("SIGINT", () => void shutdown("SIGINT"))
+
 await writeFile(
   registration + ".tmp",
   JSON.stringify({
@@ -100,8 +110,12 @@ await rename(registration + ".tmp", registration)
 
 async function shutdown(signal?: NodeJS.Signals) {
   if (signal !== undefined) await writeFile(registration + ".signal", signal)
+  // A lingering server unregisters on SIGTERM but keeps running, and holds its port, until killed.
+  if (mode === "lingering") {
+    await rm(registration, { force: true })
+    await writeFile(registration + ".unregistered", "")
+    await Bun.sleep(Number(delay))
+  }
   server.stop(true)
   process.exit()
 }
-process.on("SIGTERM", () => void shutdown("SIGTERM"))
-process.on("SIGINT", () => void shutdown("SIGINT"))
