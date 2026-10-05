@@ -308,6 +308,7 @@ export const dict = {
   "dialog.directory.readError": "ไม่สามารถอ่านโฟลเดอร์นี้ได้",
 
   "dialog.server.add.title": "เพิ่มเซิร์ฟเวอร์",
+  "dialog.server.add.url": "URL เซิร์ฟเวอร์",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์",
   "dialog.server.add.checking": "กำลังตรวจสอบ…",
@@ -847,6 +848,7 @@ export const dict = {
   "common.color.gray": "เทา",
   "mcp.auth.interactiveForm": "เซิร์ฟเวอร์ MCP {{name}} ต้องการฟอร์มการตรวจสอบสิทธิ์แบบโต้ตอบ",
   "server.connect.title": "เชื่อมต่อกับเซิร์ฟเวอร์",
+  "server.connect.description": "ใส่ที่อยู่เซิร์ฟเวอร์และรหัสผ่านของคุณเพื่อเริ่มต้น",
   "server.connect.button": "เชื่อมต่อ",
   "server.connect.address.invalid": "ใส่ที่อยู่เซิร์ฟเวอร์ HTTP หรือ HTTPS ที่ถูกต้อง",
   "server.connect.failed": "ไม่สามารถเชื่อมต่อได้ ตรวจสอบที่อยู่เซิร์ฟเวอร์และรหัสผ่าน จากนั้นลองใหม่อีกครั้ง",

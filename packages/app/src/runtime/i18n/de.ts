@@ -22,6 +22,7 @@ export const dict = {
   "server.status.authentication": "Authentifizierung erforderlich",
   "mcp.auth.interactiveForm": "Der MCP-Server {{name}} erfordert ein interaktives Authentifizierungsformular",
   "server.connect.title": "Stellen Sie eine Verbindung zu einem Server her",
+  "server.connect.description": "Geben Sie Ihre Serveradresse und Ihr Passwort ein, um zu beginnen.",
   "server.connect.button": "Verbinden",
   "server.connect.address.invalid": "Geben Sie eine gültige HTTP- oder HTTPS-Serveradresse ein.",
   "server.connect.failed":
@@ -431,6 +432,7 @@ export const dict = {
   "dialog.directory.parent": "Übergeordnet",
   "dialog.directory.readError": "Dieser Ordner kann nicht gelesen werden",
   "dialog.server.add.title": "Server hinzufügen",
+  "dialog.server.add.url": "Serveradresse",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Verbindung zum Server fehlgeschlagen",
   "dialog.server.add.checking": "Prüfen…",

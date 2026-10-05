@@ -22,6 +22,7 @@ export const dict = {
   "server.status.authentication": "Autentisering kreves",
   "mcp.auth.interactiveForm": "MCP server {{name}} krever et interaktivt autentiseringsskjema",
   "server.connect.title": "Koble til en server",
+  "server.connect.description": "Skriv inn serveradressen og passordet for å komme i gang.",
   "server.connect.button": "Koble til",
   "server.connect.address.invalid": "Skriv inn en gyldig HTTP- eller HTTPS-serveradresse.",
   "server.connect.failed": "Kunne ikke koble til. Sjekk serveradressen og passordet, og prøv på nytt.",
@@ -495,6 +496,7 @@ export const dict = {
   "dialog.directory.readError": "Kan ikke lese denne mappen",
 
   "dialog.server.add.title": "Legg til en server",
+  "dialog.server.add.url": "Server-URL",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Kunne ikke koble til server",
   "dialog.server.add.checking": "Sjekker…",

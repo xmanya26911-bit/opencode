@@ -310,6 +310,7 @@ export const dict = {
   "dialog.directory.readError": "無法讀取此資料夾",
 
   "dialog.server.add.title": "新增伺服器",
+  "dialog.server.add.url": "伺服器 URL",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "無法連線到伺服器",
   "dialog.server.add.checking": "檢查中…",
@@ -836,6 +837,7 @@ export const dict = {
   "common.color.gray": "灰色",
   "mcp.auth.interactiveForm": "MCP 伺服器 {{name}} 需要互動式認證表單",
   "server.connect.title": "連線至伺服器",
+  "server.connect.description": "輸入伺服器位址和密碼以開始使用。",
   "server.connect.button": "連線",
   "server.connect.address.invalid": "請輸入有效的 HTTP 或 HTTPS 伺服器位址。",
   "server.connect.failed": "無法連線。請檢查伺服器位址和密碼，然後重試。",

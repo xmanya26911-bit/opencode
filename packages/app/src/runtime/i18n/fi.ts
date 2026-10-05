@@ -18,6 +18,7 @@ export const dict = {
   "server.status.authentication": "Todennus vaaditaan",
   "mcp.auth.interactiveForm": "MCP-palvelin {{name}} vaatii interaktiivisen todennuslomakkeen",
   "server.connect.title": "Yhdistä palvelimeen",
+  "server.connect.description": "Aloita kirjoittamalla palvelimesi osoite ja salasana.",
   "server.connect.button": "Yhdistä",
   "server.connect.address.invalid": "Anna kelvollinen HTTP- tai HTTPS-palvelinosoite.",
   "server.connect.failed":
@@ -412,6 +413,7 @@ export const dict = {
   "dialog.directory.parent": "Ylätaso",
   "dialog.directory.readError": "Tätä kansiota ei voi lukea",
   "dialog.server.add.title": "Lisää palvelin",
+  "dialog.server.add.url": "Palvelimen osoite",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Ei voitu muodostaa yhteyttä palvelimeen",
   "dialog.server.add.checking": "Tarkistetaan…",

@@ -288,6 +288,7 @@ export const dict = {
   "dialog.directory.parent": "Tėvas",
   "dialog.directory.readError": "Nepavyko perskaityti šio aplanko",
   "dialog.server.add.title": "Pridėti serverį",
+  "dialog.server.add.url": "Serverio adresas",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Nepavyko prisijungti prie serverio",
   "dialog.server.add.checking": "Tikrinama…",
@@ -799,6 +800,7 @@ export const dict = {
   "server.status.authentication": "Reikalingas autentifikavimas",
   "mcp.auth.interactiveForm": "MCP serveriui {{name}} reikalinga interaktyvi autentifikavimo forma",
   "server.connect.title": "Prisijunkite prie serverio",
+  "server.connect.description": "Norėdami pradėti, įveskite savo serverio adresą ir slaptažodį.",
   "server.connect.button": "Prisijunkite",
   "server.connect.address.invalid": "Įveskite galiojantį HTTP arba HTTPS serverio adresą.",
   "server.connect.failed":

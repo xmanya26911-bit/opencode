@@ -18,6 +18,7 @@ export const dict = {
   "server.status.authentication": "Godkendelse påkrævet",
   "mcp.auth.interactiveForm": "MCP server {{name}} kræver en interaktiv godkendelsesformular",
   "server.connect.title": "Opret forbindelse til en server",
+  "server.connect.description": "Indtast din serveradresse og adgangskode for at komme i gang.",
   "server.connect.button": "Forbind",
   "server.connect.address.invalid": "Indtast en gyldig HTTP- eller HTTPS-serveradresse.",
   "server.connect.failed":
@@ -434,6 +435,7 @@ export const dict = {
   "dialog.directory.readError": "Denne mappe kan ikke læses",
 
   "dialog.server.add.title": "Tilføj en server",
+  "dialog.server.add.url": "Serveradresse",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Kunne ikke forbinde til server",
   "dialog.server.add.checking": "Tjekker…",

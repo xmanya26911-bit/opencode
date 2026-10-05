@@ -329,6 +329,7 @@ export const dict = {
   "dialog.directory.readError": "Не вдалося прочитати цю папку",
 
   "dialog.server.add.title": "Додати сервер",
+  "dialog.server.add.url": "Адреса сервера",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Не вдалося підключитися до сервера",
   "dialog.server.add.checking": "Перевірка…",
@@ -880,6 +881,7 @@ export const dict = {
   "common.color.gray": "сірий",
   "mcp.auth.interactiveForm": "Сервер MCP {{name}} потребує інтерактивної форми автентифікації",
   "server.connect.title": "Підключитися до сервера",
+  "server.connect.description": "Введіть адресу сервера та пароль, щоб розпочати.",
   "server.connect.button": "Підключитися",
   "server.connect.address.invalid": "Введіть дійсну адресу сервера HTTP або HTTPS.",
   "server.connect.failed": "Не вдалося підключитися. Перевірте адресу сервера та пароль, потім повторіть спробу.",

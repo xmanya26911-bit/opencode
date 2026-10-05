@@ -758,7 +758,9 @@ test("the add server dialog keeps focus above fullscreen settings", async ({ pag
   await settings.getByRole("button", { name: "Add server" }).click()
 
   const editor = page.getByRole("dialog", { name: "Add server" })
-  await expect(editor.getByPlaceholder("http://localhost:4096")).toBeFocused()
+  await expect(editor.getByPlaceholder("http://192.168.1.2:4096/auth/connect/…")).toBeFocused()
+  await expect(editor.getByPlaceholder("password")).toHaveCount(0)
+  await editor.getByRole("button", { name: "Use password", exact: true }).click()
   await expect(editor.getByPlaceholder("username")).toHaveCount(0)
   const name = editor.getByPlaceholder("Localhost", { exact: true })
   await name.click()
@@ -790,7 +792,7 @@ test("the add server dialog pairs from a one-time link and explains a spent one"
     await settings.locator('[data-component="settings-nav-group-header"]').filter({ hasText: "Servers" }).hover()
     await settings.getByRole("button", { name: "Add server" }).click()
     const editor = page.getByRole("dialog", { name: "Add server" })
-    await editor.getByPlaceholder("http://localhost:4096").fill(link)
+    await editor.getByPlaceholder("http://192.168.1.2:4096/auth/connect/…").fill(link)
     await editor.getByRole("button", { name: "Add server", exact: true }).click()
 
     return editor

@@ -311,6 +311,7 @@ export const dict = {
   "dialog.directory.readError": "Tidak dapat membaca folder ini",
 
   "dialog.server.add.title": "Tambah server",
+  "dialog.server.add.url": "Alamat server",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Tidak dapat terhubung ke server",
   "dialog.server.add.checking": "Memeriksa…",
@@ -857,6 +858,7 @@ export const dict = {
   "common.color.gray": "abu-abu",
   "mcp.auth.interactiveForm": "Server MCP {{name}} memerlukan formulir autentikasi interaktif",
   "server.connect.title": "Sambungkan ke server",
+  "server.connect.description": "Masukkan alamat server dan kata sandi Anda untuk memulai.",
   "server.connect.button": "Sambungkan",
   "server.connect.address.invalid": "Masukkan alamat server HTTP atau HTTPS yang valid.",
   "server.connect.failed": "Tidak dapat terhubung. Periksa alamat server dan kata sandi, lalu coba lagi.",

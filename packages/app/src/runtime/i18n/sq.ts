@@ -275,6 +275,7 @@ export const dict = {
   "dialog.directory.parent": "Prindi",
   "dialog.directory.readError": "Nuk mund të lexohet kjo dosje",
   "dialog.server.add.title": "Shto server",
+  "dialog.server.add.url": "Adresa e serverit",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Nuk mund të lidhej me serverin",
   "dialog.server.add.checking": "Po kontrollon…",
@@ -776,6 +777,7 @@ export const dict = {
   "server.status.authentication": "Kërkohet vërtetimi",
   "mcp.auth.interactiveForm": "Serveri MCP {{name}} kërkon një formular vërtetimi interaktiv",
   "server.connect.title": "Lidhu me një server",
+  "server.connect.description": "Futni adresën dhe fjalëkalimin e serverit tuaj për të filluar.",
   "server.connect.button": "Lidhu",
   "server.connect.address.invalid": "Fut një adresë të vlefshme serveri HTTP ose HTTPS.",
   "server.connect.failed":

@@ -313,6 +313,7 @@ export const dict = {
   "dialog.directory.readError": "Bu klasör okunamıyor",
 
   "dialog.server.add.title": "Sunucu ekle",
+  "dialog.server.add.url": "Sunucu URL'si",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Sunucuya bağlanılamadı",
   "dialog.server.add.checking": "Kontrol ediliyor…",
@@ -855,6 +856,7 @@ export const dict = {
   "server.status.authentication": "Kimlik doğrulama gerekli",
   "mcp.auth.interactiveForm": "MCP sunucusu {{name}} etkileşimli bir kimlik doğrulama formu gerektirir",
   "server.connect.title": "Bir sunucuya bağlanın",
+  "server.connect.description": "Başlamak için sunucu adresinizi ve şifrenizi girin.",
   "server.connect.button": "Bağlan",
   "server.connect.address.invalid": "Geçerli bir HTTP veya HTTPS sunucu adresi girin.",
   "server.connect.failed": "Bağlantı kurulamadı. Sunucu adresini ve şifreyi kontrol edip tekrar deneyin.",

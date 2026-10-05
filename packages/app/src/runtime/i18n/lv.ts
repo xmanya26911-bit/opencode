@@ -275,6 +275,7 @@ export const dict = {
   "dialog.directory.parent": "Vecāks",
   "dialog.directory.readError": "Neizdevās nolasīt šo mapi",
   "dialog.server.add.title": "Pievienot serveri",
+  "dialog.server.add.url": "Servera adrese",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Neizdevās izveidot savienojumu ar serveri",
   "dialog.server.add.checking": "Pārbauda…",
@@ -786,6 +787,7 @@ export const dict = {
   "server.status.authentication": "Nepieciešama autentifikācija",
   "mcp.auth.interactiveForm": "MCP serverim {{name}} ir nepieciešama interaktīva autentifikācijas veidlapa",
   "server.connect.title": "Izveidojiet savienojumu ar serveri",
+  "server.connect.description": "Lai sāktu, ievadiet servera adresi un paroli.",
   "server.connect.button": "Savienot",
   "server.connect.address.invalid": "Ievadiet derīgu HTTP vai HTTPS servera adresi.",
   "server.connect.failed":

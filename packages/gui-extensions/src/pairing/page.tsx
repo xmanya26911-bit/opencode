@@ -339,7 +339,7 @@ function DialogPairing(props: {
           <div class="flex min-w-0 flex-col items-center gap-1 pb-2">
             <Tooltip
               class="min-w-0 max-w-full"
-              value={ctx.t(copy.isSuccess ? "common.copied" : "copy")}
+              value={ctx.t(copy.isSuccess ? "common.copied" : "copyLink")}
               placement="top"
               forceOpen={copy.isSuccess ? true : undefined}
             >
@@ -347,12 +347,13 @@ function DialogPairing(props: {
                 type="button"
                 class="inline-flex min-h-8 max-w-full select-none items-center justify-center gap-2 rounded-[6px] px-2 py-1 text-[13px] font-[440] leading-text-compact tracking-[-0.04px] text-v2-text-text-muted transition-colors hover:bg-v2-background-bg-layer-02 hover:text-v2-text-text-base focus-visible:bg-v2-background-bg-layer-02 focus-visible:outline-none disabled:opacity-50"
                 disabled={copy.isPending}
-                aria-label={ctx.t("copy")}
+                aria-label={ctx.t("copyLink")}
                 onClick={() => copy.mutate()}
               >
                 <Icon name={copy.isSuccess ? "check" : "copy"} size="small" class="shrink-0" />
-                <bdi dir="ltr" class="min-w-0 break-all text-start">
-                  {route()?.url}
+                {/* The whole link, code included, so it can be read out or typed on a device without a camera. */}
+                <bdi dir="ltr" class="min-w-0 break-all text-start text-12-mono">
+                  {url()}
                 </bdi>
               </button>
             </Tooltip>

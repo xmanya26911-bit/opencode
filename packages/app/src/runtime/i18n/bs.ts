@@ -301,6 +301,7 @@ export const dict = {
   "dialog.directory.readError": "Nije moguće pročitati ovu fasciklu",
 
   "dialog.server.add.title": "Dodaj server",
+  "dialog.server.add.url": "URL servera",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Nije moguće povezati se na server",
   "dialog.server.add.checking": "Provjera…",
@@ -857,6 +858,7 @@ export const dict = {
   "common.color.gray": "siva",
   "mcp.auth.interactiveForm": "MCP server {{name}} zahtijeva interaktivni obrazac za autentifikaciju",
   "server.connect.title": "Poveži se sa serverom",
+  "server.connect.description": "Unesite adresu servera i lozinku da biste započeli.",
   "server.connect.button": "Poveži se",
   "server.connect.address.invalid": "Unesite ispravnu HTTP ili HTTPS adresu servera.",
   "server.connect.failed": "Povezivanje nije uspjelo. Provjerite adresu servera i lozinku, pa pokušajte ponovo.",

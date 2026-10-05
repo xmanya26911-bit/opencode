@@ -276,6 +276,7 @@ export const dict = {
   "dialog.directory.parent": "Родител",
   "dialog.directory.readError": "Не може да се прочита оваа папка",
   "dialog.server.add.title": "Додај сервер",
+  "dialog.server.add.url": "Адреса на серверот",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Не може да се поврзе со серверот",
   "dialog.server.add.checking": "Се проверува…",
@@ -789,6 +790,7 @@ export const dict = {
   "common.color.gray": "сива",
   "mcp.auth.interactiveForm": "MCP сервер {{name}} бара интерактивна форма за автентикација",
   "server.connect.title": "Поврзи се со сервер",
+  "server.connect.description": "Внесете ја вашата адреса на серверот и лозинка за да започнете.",
   "server.connect.button": "Поврзи се",
   "server.connect.address.invalid": "Внесете валидна HTTP или HTTPS адреса на серверот.",
   "server.connect.failed":

@@ -281,6 +281,7 @@ export const dict = {
   "dialog.directory.parent": "ބެލެނިވެރިޔާއެވެ",
   "dialog.directory.readError": "މި ފޯލްޑަރ ކިޔަން ނުކުޅެދިއްޖެއެވެ",
   "dialog.server.add.title": "ސަރވަރ އިތުރުކުރުން",
+  "dialog.server.add.url": "ސަރވަރ އެޑްރެސް",
   "dialog.server.add.placeholder": "http://localhost:4096 އެވެ",
   "dialog.server.add.error": "ސަރވަރ އާއި ގުޅެވޭ ގޮތެއް ނުވިއެވެ",
   "dialog.server.add.checking": "ޗެކް ކުރަމުން…",
@@ -810,6 +811,7 @@ export const dict = {
   "common.color.gray": "އަޅިކުލަ",
   "mcp.auth.interactiveForm": "MCP ސަރވަރ \u2068{{name}}\u2069 އަށް ބޭނުންވަނީ އިންޓަރެކްޓިވް އޮތެންޓިކޭޝަން ފޯމެކެވެ",
   "server.connect.title": "ސަރވަރ އަކަށް ގުޅާށެވެ",
+  "server.connect.description": "ފަށަން ސަރވަރ އެޑްރެހާއި ޕާސްވޯޑް ލިޔެލާށެވެ.",
   "server.connect.button": "ގުޅުވުން",
   "server.connect.address.invalid": "ސައްހަ HTTP ނުވަތަ HTTPS ސަރވަރ އެޑްރެހެއް ލިޔެލާށެވެ.",
   "server.connect.failed":

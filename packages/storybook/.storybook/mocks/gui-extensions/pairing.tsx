@@ -13,7 +13,7 @@ type Links = { custom: string; selected: string }
 export function pairingClient(urls: readonly string[]): IpcClient<typeof Pairing.spec> {
   return {
     info: async () => ({ urls }),
-    code: async () => ({ code: Math.random().toString(36).slice(2).padEnd(22, "x"), expiresIn: 300 }),
+    code: async () => ({ code: pairingCode(), expiresIn: 300 }),
     screenActive: async () => false,
     setScreenActive: async () => undefined,
     state: () => undefined,
@@ -65,4 +65,10 @@ export function PairingHost(props: { links?: Partial<Links>; children: JSX.Eleme
       {props.children}
     </div>
   ))
+}
+
+// The server's codes are 16 random bytes in base64url.
+function pairingCode() {
+  const bytes = crypto.getRandomValues(new Uint8Array(16))
+  return btoa(String.fromCharCode(...bytes)).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "")
 }

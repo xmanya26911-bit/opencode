@@ -300,6 +300,7 @@ export const dict = {
   "dialog.directory.parent": "starš",
   "dialog.directory.readError": "Te mape ni mogoče prebrati",
   "dialog.server.add.title": "Dodaj strežnik",
+  "dialog.server.add.url": "Naslov strežnika",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Ni bilo mogoče vzpostaviti povezave s strežnikom",
   "dialog.server.add.checking": "Preverjanje …",
@@ -809,6 +810,7 @@ export const dict = {
   "common.color.gray": "siva",
   "mcp.auth.interactiveForm": "MCP strežnik {{name}} zahteva interaktivni obrazec za overjanje",
   "server.connect.title": "Poveži se s strežnikom",
+  "server.connect.description": "Vnesite naslov strežnika in geslo za začetek.",
   "server.connect.button": "Poveži",
   "server.connect.address.invalid": "Vnesite veljaven HTTP ali HTTPS naslov strežnika.",
   "server.connect.failed":

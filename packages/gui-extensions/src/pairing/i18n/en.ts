@@ -9,7 +9,7 @@ export default {
   "screenActive.error": "Could not update the screen activity setting. Try again.",
   description: "Connect another device to this machine's OpenCode server.",
   qr: "Pairing QR code",
-  copy: "Copy details",
+  copyLink: "Copy link",
   "copy.error": "Could not copy pairing details. Try again.",
   error: "Could not update pairing details. Try again.",
   routes: "Connect with",

@@ -277,6 +277,7 @@ export const dict = {
   "dialog.directory.parent": "Γονικός",
   "dialog.directory.readError": "Δεν είναι δυνατή η ανάγνωση αυτού του φακέλου",
   "dialog.server.add.title": "Προσθήκη διακομιστή",
+  "dialog.server.add.url": "Διεύθυνση διακομιστή",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Δεν ήταν δυνατή η σύνδεση με τον διακομιστή",
   "dialog.server.add.checking": "Έλεγχος…",
@@ -790,6 +791,7 @@ export const dict = {
   "server.status.authentication": "Απαιτείται έλεγχος ταυτότητας",
   "mcp.auth.interactiveForm": "Ο διακομιστής MCP Ο {{name}} απαιτεί μια διαδραστική φόρμα ελέγχου ταυτότητας",
   "server.connect.title": "Σύνδεση σε διακομιστή",
+  "server.connect.description": "Εισαγάγετε τη διεύθυνση του διακομιστή και τον κωδικό πρόσβασης για να ξεκινήσετε.",
   "server.connect.button": "Σύνδεση",
   "server.connect.address.invalid": "Εισαγάγετε μια έγκυρη διεύθυνση διακομιστή HTTP ή HTTPS.",
   "server.connect.failed":

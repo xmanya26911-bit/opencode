@@ -18,6 +18,7 @@ export const dict = {
   "server.status.authentication": "Authenticatie vereist",
   "mcp.auth.interactiveForm": "MCP-server {{name}} vereist een interactief authenticatieformulier",
   "server.connect.title": "Maak verbinding met een server",
+  "server.connect.description": "Voer uw serveradres en wachtwoord in om aan de slag te gaan.",
   "server.connect.button": "Verbinden",
   "server.connect.address.invalid": "Voer een geldig HTTP- of HTTPS-serveradres in.",
   "server.connect.failed":
@@ -486,6 +487,7 @@ export const dict = {
   "dialog.directory.parent": "Bovenliggende map",
   "dialog.directory.readError": "Kan deze map niet lezen",
   "dialog.server.add.title": "Server toevoegen",
+  "dialog.server.add.url": "Serveradres",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Kan geen verbinding maken met de server",
   "dialog.server.add.checking": "Controleren…",

@@ -18,6 +18,7 @@ export const dict = {
   "server.status.authentication": "Se requiere autenticación",
   "mcp.auth.interactiveForm": "El servidor MCP {{name}} requiere un formulario de autenticación interactivo",
   "server.connect.title": "Conectarse a un servidor",
+  "server.connect.description": "Ingrese la dirección de su servidor y la contraseña para comenzar.",
   "server.connect.button": "Conectar",
   "server.connect.address.invalid": "Ingrese una dirección de servidor HTTP o HTTPS válida.",
   "server.connect.failed":
@@ -523,6 +524,7 @@ export const dict = {
   "dialog.directory.readError": "No se puede leer esta carpeta",
 
   "dialog.server.add.title": "Añadir un servidor",
+  "dialog.server.add.url": "URL del servidor",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "No se pudo conectar al servidor",
   "dialog.server.add.checking": "Comprobando…",

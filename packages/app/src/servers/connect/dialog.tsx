@@ -30,8 +30,9 @@ import { useCheckServerHealth } from "@/runtime/server/health"
 import { usePlatform } from "@/runtime/platform/platform"
 import { isMixedContent } from "./browser"
 import { cameraHint, createCameraAvailability } from "./camera"
-import { pairingLink, type Pairing } from "./pairing"
+import { pairingLink, serverAddress, type Pairing } from "./pairing"
 import { useRedeemPairing } from "./redeem"
+import { ConnectMethodSwitch, type ConnectMethod } from "./method"
 import "@/settings/settings.css"
 
 const PairingScanner = lazy(() => import("./scanner").then((module) => ({ default: module.PairingScanner })))
@@ -84,6 +85,14 @@ export const DialogServer: Component<{
   const title = () =>
     props.mode === "add" ? language.t("dialog.server.add.title") : language.t("dialog.server.edit.title")
 
+  const error = () => (
+    <Show when={form.state.error()}>
+      <span id="dialog-server-error" class="settings-server-dialog-error" role="alert">
+        {form.state.error()}
+      </span>
+    </Show>
+  )
+
   const submitLabel = () => {
     if (form.state.busy()) return language.t("dialog.server.add.checking")
 
@@ -120,27 +129,49 @@ export const DialogServer: Component<{
                 <span>{language.t("dialog.server.signedOut")}</span>
               </p>
             </Show>
-            <div class="flex w-full min-w-0 flex-col gap-2">
-              <label class="settings-server-dialog-label">{language.t("server.connect.address")}</label>
-              <TextInput
-                type="text"
-                appearance="large"
-                class="!w-full self-stretch"
-                value={form.state.value()}
-                placeholder={language.t("dialog.server.add.placeholder")}
-                invalid={!!form.state.error()}
-                disabled={form.state.busy()}
-                autofocus
-                aria-describedby={form.state.error() ? "dialog-server-error" : undefined}
-                onInput={(event) => form.change.value(event.currentTarget.value)}
-                onKeyDown={keyDown}
-              />
-              <Show when={form.state.error()}>
-                <span id="dialog-server-error" class="settings-server-dialog-error" role="alert">
-                  {form.state.error()}
-                </span>
-              </Show>
-            </div>
+            <Show
+              when={form.state.method() === "password"}
+              fallback={
+                <div class="flex w-full min-w-0 flex-col gap-2">
+                  <label class="settings-server-dialog-label">{language.t("server.connect.link")}</label>
+                  <TextInput
+                    type="text"
+                    appearance="large"
+                    class="!w-full self-stretch"
+                    dir="ltr"
+                    spellcheck={false}
+                    autocapitalize="off"
+                    value={form.state.link()}
+                    placeholder={language.t("server.connect.link.placeholder")}
+                    invalid={!!form.state.error()}
+                    disabled={form.state.busy()}
+                    autofocus
+                    aria-describedby={form.state.error() ? "dialog-server-error" : undefined}
+                    onInput={(event) => form.change.link(event.currentTarget.value)}
+                    onKeyDown={keyDown}
+                  />
+                  {error()}
+                </div>
+              }
+            >
+              <div class="flex w-full min-w-0 flex-col gap-2">
+                <label class="settings-server-dialog-label">{language.t("dialog.server.add.url")}</label>
+                <TextInput
+                  type="text"
+                  appearance="large"
+                  class="!w-full self-stretch"
+                  value={form.state.value()}
+                  placeholder={language.t("dialog.server.add.placeholder")}
+                  invalid={!!form.state.error()}
+                  disabled={form.state.busy()}
+                  autofocus
+                  aria-describedby={form.state.error() ? "dialog-server-error" : undefined}
+                  onInput={(event) => form.change.value(event.currentTarget.value)}
+                  onKeyDown={keyDown}
+                />
+                {error()}
+              </div>
+            </Show>
             <div class="flex w-full min-w-0 flex-col gap-2">
               <label class="settings-server-dialog-label">{language.t("dialog.server.add.name")}</label>
               <TextInput
@@ -154,20 +185,26 @@ export const DialogServer: Component<{
                 onKeyDown={keyDown}
               />
             </div>
-            <div class="flex w-full min-w-0 flex-col gap-2">
-              <label class="settings-server-dialog-label">{language.t("dialog.server.add.password")}</label>
-              <TextInput
-                type="password"
-                appearance="large"
-                class="!w-full self-stretch"
-                value={form.state.password()}
-                placeholder={language.t("dialog.server.add.passwordPlaceholder")}
-                disabled={form.state.busy()}
-                onInput={(event) => form.change.password(event.currentTarget.value)}
-                onKeyDown={keyDown}
-              />
-            </div>
-            <Show when={platform.platform === "web"}>
+            <Show when={form.state.method() === "password"}>
+              <div class="flex w-full min-w-0 flex-col gap-2">
+                <label class="settings-server-dialog-label">{language.t("dialog.server.add.password")}</label>
+                <TextInput
+                  type="password"
+                  appearance="large"
+                  class="!w-full self-stretch"
+                  value={form.state.password()}
+                  placeholder={language.t("dialog.server.add.passwordPlaceholder")}
+                  disabled={form.state.busy()}
+                  aria-describedby="dialog-server-password-hint"
+                  onInput={(event) => form.change.password(event.currentTarget.value)}
+                  onKeyDown={keyDown}
+                />
+                <span id="dialog-server-password-hint" class="settings-server-dialog-hint">
+                  {language.t("server.connect.password.hint")}
+                </span>
+              </div>
+            </Show>
+            <Show when={form.state.method() === "link" && platform.platform === "web"}>
               <Show
                 when={camera.available.latest || camera.available.loading}
                 fallback={<span class="settings-server-dialog-hint">{language.t(cameraHint())}</span>}
@@ -183,6 +220,11 @@ export const DialogServer: Component<{
                 </Button>
               </Show>
             </Show>
+            <ConnectMethodSwitch
+              method={form.state.method()}
+              disabled={form.state.busy()}
+              onChange={form.change.method}
+            />
           </div>
         </Show>
       </DialogBody>
@@ -212,18 +254,25 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
 
   const [store, setStore] = createStore<{
     mode: FormMode
+    method: ConnectMethod
     originalUrl: string | undefined
+    link: string
     values: ServerFormValues
     scanning: boolean
     error: string
     status: boolean | undefined
+    // A redeemed link, kept so a failed connection check can retry without the spent code.
+    paired: { link: string; pairing: Pairing } | undefined
   }>({
     mode: "list",
+    method: "link",
     originalUrl: undefined,
+    link: "",
     values: { url: "", name: "", password: "" },
     scanning: false,
     error: "",
     status: undefined,
+    paired: undefined,
   })
 
   onCleanup(healthPreview.cancel)
@@ -232,11 +281,14 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
     healthPreview.cancel()
     setStore({
       mode: "list",
+      method: "link",
       originalUrl: undefined,
+      link: "",
       values: { url: "", name: "", password: "" },
       scanning: false,
       error: "",
       status: undefined,
+      paired: undefined,
     })
   }
 
@@ -257,32 +309,55 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
       remove: (key) => server.remove(key),
     })
 
+  // Where the form points: a scanned or pasted pairing link wins, else the address and password fields.
+  const target = async (scanned?: Pairing): Promise<Pairing | ServerConnection.HttpBase | undefined> => {
+    if (scanned) return scanned
+
+    if (store.method === "link") {
+      if (store.paired?.link === store.link) return store.paired.pairing
+      const redeemed = await redeem(store.link)
+
+      if (redeemed && "error" in redeemed) return void setStore("error", redeemed.error)
+
+      if (!redeemed) {
+        // A bare server address belongs to the password form.
+        const address = serverAddress(store.link)
+
+        if (address) return void setStore({ method: "password", link: "", values: { ...store.values, url: address } })
+
+        return void setStore("error", language.t("server.connect.link.invalid"))
+      }
+
+      // The code is spent now, so a failed connection check retries with the token instead.
+      setStore("paired", { link: store.link, pairing: redeemed.pairing })
+
+      return redeemed.pairing
+    }
+
+    // A pairing link pasted into the address field still pairs.
+    const redeemed = await redeem(store.values.url)
+
+    if (redeemed && "error" in redeemed) return void setStore("error", redeemed.error)
+
+    if (redeemed) return redeemed.pairing
+    const url = normalizeServerUrl(store.values.url)
+
+    if (!url) return void reset()
+
+    return { url, password: store.values.password || undefined }
+  }
+
   const request = useMutation(() => ({
-    mutationFn: async () => {
-      const redeemed = await redeem(store.values.url)
+    mutationFn: async (scanned?: Pairing) => {
+      const http = await target(scanned)
 
-      if (redeemed && "error" in redeemed) {
-        setStore("error", redeemed.error)
-
-        return
-      }
-
-      // Keep the token in the form so a failed connection check can retry without the spent code.
-      if (redeemed)
-        setStore("values", { ...store.values, url: redeemed.pairing.url, password: redeemed.pairing.password })
-      const normalized = normalizeServerUrl(store.values.url)
-
-      if (!normalized) {
-        reset()
-
-        return
-      }
-
+      if (!http) return
+      const normalized = http.url
       const original = store.mode === "edit" ? editing() : undefined
 
       if (store.mode === "edit" && !original) return
       const name = store.values.name.trim() || undefined
-      const password = store.values.password || undefined
+      const password = http.password
 
       if (
         original?.type === "http" &&
@@ -337,7 +412,7 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
 
   const preview = () => {
     // A pairing link is not a server address until it is redeemed, and redeeming spends it.
-    if (pairingLink(store.values.url)) {
+    if (store.method === "link" || pairingLink(store.values.url)) {
       healthPreview.cancel()
       setStore("status", undefined)
 
@@ -364,6 +439,8 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
     reset()
     setStore({
       mode: "edit",
+      // A signed-out server needs a new pairing link; otherwise editing starts from its address.
+      method: global.servers.health[ServerConnection.key(connection)]?.unauthorized ? "link" : "password",
       originalUrl: connection.http.url,
       values: {
         url: connection.http.url,
@@ -378,17 +455,13 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
   const submit = () => {
     if (store.mode === "list" || request.isPending) return
     setStore("error", "")
-    request.mutate()
+    request.mutate(undefined)
   }
 
   const pair = (pairing: Pairing) => {
     healthPreview.cancel()
-    setStore({
-      values: { ...store.values, url: pairing.url, password: pairing.password },
-      scanning: false,
-      error: "",
-    })
-    request.mutate()
+    setStore({ scanning: false, error: "" })
+    request.mutate(pairing)
   }
 
   createEffect(() => {
@@ -404,6 +477,8 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
       open: () => store.mode !== "list",
       adding: () => store.mode === "add",
       busy: () => request.isPending,
+      method: () => store.method,
+      link: () => store.link,
       value: () => store.values.url,
       name: () => store.values.name,
       password: () => store.values.password,
@@ -417,6 +492,15 @@ function createFormController(options: { onSelect?: (server: ServerConnection.Ht
       },
     },
     change: {
+      method: (method: ConnectMethod) => {
+        if (request.isPending) return
+        setStore({ method, error: "" })
+        preview()
+      },
+      link: (value: string) => {
+        if (request.isPending) return
+        setStore({ link: value, error: "" })
+      },
       value: (value: string) => change("url", value),
       name: (value: string) => change("name", value),
       password: (value: string) => change("password", value),

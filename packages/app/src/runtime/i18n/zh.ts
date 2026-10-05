@@ -326,6 +326,7 @@ export const dict = {
   "dialog.directory.readError": "无法读取此文件夹",
 
   "dialog.server.add.title": "添加服务器",
+  "dialog.server.add.url": "服务器 URL",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "无法连接到服务器",
   "dialog.server.add.checking": "检查中…",
@@ -844,6 +845,7 @@ export const dict = {
   "common.color.gray": "灰色",
   "mcp.auth.interactiveForm": "MCP 服务器 {{name}} 需要交互式身份验证表单",
   "server.connect.title": "连接到服务器",
+  "server.connect.description": "输入您的服务器地址和密码以开始。",
   "server.connect.button": "连接",
   "server.connect.address.invalid": "请输入有效的 HTTP 或 HTTPS 服务器地址。",
   "server.connect.failed": "无法连接。请检查服务器地址和密码，然后重试。",

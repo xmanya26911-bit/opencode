@@ -320,6 +320,7 @@ export const dict = {
   "dialog.directory.readError": "Unable to read this folder",
 
   "dialog.server.add.title": "Add server",
+  "dialog.server.add.url": "Server address",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Could not connect to server",
   "dialog.server.add.checking": "Checking…",
@@ -330,8 +331,17 @@ export const dict = {
   "dialog.server.add.passwordPlaceholder": "password",
 
   "server.connect.title": "Connect to a server",
-  "server.connect.description.pairing": "Paste a pairing link, or enter your server address and password.",
-  "server.connect.address": "Server address or pairing link",
+  "server.connect.description": "Enter your server address and password to get started.",
+  "server.connect.description.pairing": "Paste the pairing link from the server, or scan its QR code.",
+  "server.connect.link": "Pairing link",
+  "server.connect.link.placeholder": "http://192.168.1.2:4096/auth/connect/…",
+  "server.connect.link.invalid":
+    "Paste the full pairing link from opencode pair, or from Settings → Pairing on the server's computer.",
+  "server.connect.password.prompt": "No pairing link?",
+  "server.connect.password.use": "Use password",
+  "server.connect.password.hint": "To see it, run opencode service get password on the server's computer.",
+  "server.connect.link.prompt": "Have a pairing link?",
+  "server.connect.link.use": "Use pairing link",
   "server.connect.button": "Connect",
   "server.connect.address.invalid": "Enter a valid HTTP or HTTPS server address.",
   "server.connect.failed": "Could not connect. Check the server address and password, then try again.",
@@ -348,7 +358,7 @@ export const dict = {
   "server.connect.camera.starting": "Opening camera…",
   "server.connect.mixedContent":
     "Could not connect to this HTTP server from an HTTPS page. Use an HTTPS server address instead.",
-  "server.connect.camera.native": "To scan a QR code, use your device's camera app, or paste the pairing link above.",
+  "server.connect.camera.native": "To scan the QR code, use your device's camera app, or paste the pairing link above.",
   "server.connect.camera.unavailable":
     "No camera is available to this browser. Enter your connection details manually.",
   "server.connect.camera.error":
