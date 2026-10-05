@@ -32,6 +32,8 @@ test("validates config constraints", () => {
       scroll_speed: 0.001,
       diff_style: "stacked",
       cursor: { blinking: false },
+      sidebar: { context: "compact" },
+      usage: { context_color: "colored", context_thresholds: [50, 75], cost_thresholds: [5, 20] },
       plugin: ["example-plugin"],
     }),
   ).toMatchObject({
@@ -39,12 +41,17 @@ test("validates config constraints", () => {
     attention: { volume: 1 },
     diff_style: "stacked",
     cursor: { blinking: false },
+    sidebar: { context: "compact" },
+    usage: { context_color: "colored", context_thresholds: [50, 75], cost_thresholds: [5, 20] },
   })
   expect(() => decodeInfo({ leader_timeout: 0 })).toThrow()
   expect(() => decodeInfo({ attention: { volume: 1.1 } })).toThrow()
   expect(() => decodeInfo({ prompt: { max_width: 0 } })).toThrow()
   expect(() => decodeInfo({ scroll_speed: 0 })).toThrow()
   expect(() => decodeInfo({ cursor: { style: "beam" } })).toThrow()
+  expect(() => decodeInfo({ sidebar: { context: "tiny" } })).toThrow()
+  expect(() => decodeInfo({ usage: { context_color: "rainbow" } })).toThrow()
+  expect(() => decodeInfo({ usage: { cost_thresholds: [-1] } })).toThrow()
   expect(decodeInfo({ attention: { sounds: { unknown: "sound.wav" } } })).toEqual({ attention: { sounds: {} } })
 })
 
