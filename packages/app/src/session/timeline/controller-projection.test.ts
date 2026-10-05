@@ -41,6 +41,7 @@ describe("visibleTimelineMessages", () => {
     delivery: "steer",
     payload: { text: "queued" },
   } satisfies SessionInboxInfo
+
   const work = {
     id: SessionMessage.ID.make("msg_5", { disableChecks: true }),
     type: "assistant",
@@ -81,8 +82,9 @@ describe("visibleTimelineMessages", () => {
         shellToolDefaultOpen: () => false,
         editToolDefaultOpen: () => false,
         timelineDetail: () => timelinePresets[2].value,
-        pendingUserMessageIDs: () => new Set([steer.id]),
+        pendingInputIDs: () => new Set([steer.id]),
       })
+
       expect<unknown>(projection.activeMessageID()).toBe("msg_1")
       expect<unknown>(projection.rows().map((row) => [row._tag, row.userMessageID])).toEqual([
         ["UserMessage", "msg_1"],
@@ -114,11 +116,9 @@ describe("visibleTimelineMessages", () => {
 
   test("moves a queued input after existing work when changed to steer", () => {
     const source = [...messages.slice(0, 3), work]
-    expect<unknown>(visibleTimelineMessages(source, [{ ...steer, delivery: "queue" }]).map((message) => message.id)).toEqual([
-      "msg_1",
-      "msg_2",
-      "msg_5",
-    ])
+    expect<unknown>(
+      visibleTimelineMessages(source, [{ ...steer, delivery: "queue" }]).map((message) => message.id),
+    ).toEqual(["msg_1", "msg_2", "msg_5"])
     expect<unknown>(visibleTimelineMessages(source, [steer]).map((message) => message.id)).toEqual([
       "msg_1",
       "msg_2",
@@ -129,7 +129,7 @@ describe("visibleTimelineMessages", () => {
     expect(visibleTimelineMessages(delivered, [])).toBe(delivered)
   })
 
-  test("preserves steer order and excludes reverted steers", () => {
+  test("preserves pending input order and excludes reverted steers", () => {
     const source = [...messages, work]
     const pending = [steer, { ...steer, id: SessionMessage.ID.make("msg_4", { disableChecks: true }) }]
     expect<unknown>(visibleTimelineMessages(source, pending).map((message) => message.id)).toEqual([
@@ -138,6 +138,37 @@ describe("visibleTimelineMessages", () => {
       "msg_5",
       "msg_3",
       "msg_4",
+    ])
+
+    // A notice admitted after the steers, before the next step, sinks with them in admission order. The
+    // server delivers steers in that order and the store moves each delivered input to the end, so the
+    // rendered order does not change at delivery.
+    const notice = {
+      id: SessionMessage.ID.make("msg_4a", { disableChecks: true }),
+      sessionID: SessionID.make("ses_1", { disableChecks: true }),
+      time: { created: 4 },
+      type: "synthetic",
+      delivery: "steer",
+      payload: { text: "", description: "Task finished" },
+    } satisfies SessionInboxInfo
+
+    const noticeMessage = {
+      id: notice.id,
+      type: "synthetic",
+      ...notice.payload,
+      time: notice.time,
+    } satisfies SessionMessageInfo
+
+    const pendingOrder = visibleTimelineMessages([...messages, noticeMessage, work], [...pending, notice])
+
+    // The order the server delivers in: active work, then steers and notices by admission.
+    expect<unknown>(pendingOrder.map((message) => message.id)).toEqual([
+      "msg_1",
+      "msg_2",
+      "msg_5",
+      "msg_3",
+      "msg_4",
+      "msg_4a",
     ])
     expect(
       visibleTimelineMessages(source, pending, SessionMessage.ID.make("msg_4", { disableChecks: true })).map(
@@ -206,6 +237,7 @@ describe("applyTimelineMessageHandoff", () => {
       ...handoff,
       files: [{ data: "YQ==", mime: "image/png", source: { type: "inline" } }],
     } satisfies SessionMessageInfo
+
     expect(applyTimelineMessageHandoff([durable], handoff)).toEqual([durable])
   })
 })
