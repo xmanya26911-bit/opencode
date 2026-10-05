@@ -16,10 +16,10 @@ describe("pairing routes", () => {
           "http://203.0.113.4:49374",
           "http://0.0.0.0:49374",
         ],
-        "https://box.example.ts.net",
+        "https://opencode.example.com",
       ),
     ).toEqual([
-      { url: "https://box.example.ts.net", kind: "custom" },
+      { url: "https://opencode.example.com", kind: "custom" },
       { url: "http://192.168.10.248:49374", kind: "local" },
       { url: "http://[fd12:3456::1]:49374", kind: "local" },
       { url: "http://100.87.251.43:49374", kind: "vpn" },

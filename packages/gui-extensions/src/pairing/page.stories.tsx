@@ -25,12 +25,12 @@ export default {
   },
 }
 
-/** The server listens on the local network and on a Tailscale or VPN address. */
+/** The server listens on the local network and on a VPN address. */
 export const NetworkAddresses = story(["http://127.0.0.1:49374", "http://192.168.10.248:49374", "http://100.87.251.43:49374"])
 
-/** A saved custom address, such as a Tailscale Serve or reverse proxy URL, is offered first. */
+/** A saved custom address, such as a VPN, tunnel or reverse proxy URL, is offered first. */
 export const CustomAddress = story(["http://127.0.0.1:49374", "http://192.168.10.248:49374"], {
-  custom: "https://lukeblade.tail07b29b.ts.net",
+  custom: "https://opencode.example.com",
 })
 
 /** The default service only listens on this computer, so the page explains how to let other devices in. */

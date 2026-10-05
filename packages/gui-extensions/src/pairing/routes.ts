@@ -46,7 +46,7 @@ function routeKind(hostname: string): RouteKind | undefined {
 
   if (/^(127|0)\./.test(host) || host.startsWith("169.254.") || host.startsWith("fe80:")) return
 
-  // 100.64.0.0/10 is shared address space; on a computer it almost always belongs to Tailscale or another VPN.
+  // 100.64.0.0/10 is shared address space; on a computer it almost always belongs to a mesh VPN, as does fd7a:115c:a1e0::/48.
   if (/^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(host) || host.startsWith("fd7a:115c:a1e0:")) return "vpn"
 
   if (/^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(host) || /^f[cd][0-9a-f]{2}:/.test(host)) return "local"
