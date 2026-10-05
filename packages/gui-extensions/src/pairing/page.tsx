@@ -252,6 +252,8 @@ function DialogPairing(props: {
     queryFn: (input) => props.code(input.signal),
     gcTime: 0,
     refetchInterval: (query) => (query.state.data?.expiresIn ?? 60) * 1000,
+    // A minimized window must not come back to a code that expired while it was hidden.
+    refetchIntervalInBackground: true,
   }))
 
   // The countdown is the only clock on the page.
@@ -262,7 +264,8 @@ function DialogPairing(props: {
   const remaining = () => {
     if (!code.isSuccess) return 0
 
-    return Math.max(0, code.data.expiresIn - Math.floor((now() - code.dataUpdatedAt) / 1000))
+    // The clock can lag a fresh code by up to a second; a negative age would show one second too many.
+    return Math.max(0, code.data.expiresIn - Math.floor(Math.max(0, now() - code.dataUpdatedAt) / 1000))
   }
 
   const route = createMemo(() => props.routes().find((item) => item.url === props.selected()) ?? props.routes()[0])

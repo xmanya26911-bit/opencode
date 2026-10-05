@@ -49,7 +49,8 @@ export function PairingScanner(props: { redeem: RedeemPairing; onScan: (link: st
         // QrScanner only logs a decoder that fails (for example, a worker the page may not start), so the preview
         // would look like it is still scanning.
         onDecodeError: (error) => {
-          if (error === QrScanner.NO_QR_CODE_FOUND || state.redeeming) return
+          // The native BarcodeDetector engine reports an empty frame as "Scanner error: No QR code found".
+          if (String(error).includes(QrScanner.NO_QR_CODE_FOUND) || state.redeeming) return
           setState("error", language.t("server.connect.scan.failed"))
         },
       },

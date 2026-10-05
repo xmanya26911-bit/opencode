@@ -40,17 +40,18 @@ export function createHomeProjectsController(home: HomeController) {
     { initialValue: _state },
   )
 
-  function edit(conn: ServerConnection.Http, onSave?: () => void) {
+  function edit(conn: ServerConnection.Http, onSave?: (saved: ServerConnection.Http) => void) {
     void import("@/servers/connect/dialog").then(({ DialogServer }) => {
-      void dialog.show(() => <DialogServer mode="edit" server={conn} onSave={() => onSave?.()} />)
+      void dialog.show(() => <DialogServer mode="edit" server={conn} onSave={(saved) => onSave?.(saved)} />)
     })
   }
 
   // An expired pairing session or a changed password signs the app out of an HTTP server; signing in again edits it,
-  // and the action that asked for sign-in continues once the dialog saves, as it does for extension servers.
-  function authenticate(conn: ServerConnection.Any, onConnected?: () => void) {
+  // and the action that asked for sign-in continues once the dialog saves, as it does for extension servers. It continues
+  // with the saved connection: the one it started with still carries the rejected credentials.
+  function authenticate(conn: ServerConnection.Any, onConnected?: (conn: ServerConnection.Any) => void) {
     if (conn.type !== "http" || !home.server.health(conn)?.unauthorized)
-      return ServerConnection.authenticate(conn, onConnected)
+      return ServerConnection.authenticate(conn, () => onConnected?.(conn))
     edit(conn, onConnected)
 
     return true
@@ -96,7 +97,7 @@ export function createHomeProjectsController(home: HomeController) {
       edit: (conn: ServerConnection.Http) => edit(conn),
       authenticate: (conn: ServerConnection.Any) => authenticate(conn),
       focus: (conn: ServerConnection.Any) => {
-        if (authenticate(conn, () => home.selection.focusServer(conn))) return
+        if (authenticate(conn, (next) => home.selection.focusServer(next))) return
         home.selection.focusServer(conn)
       },
     },
@@ -105,12 +106,12 @@ export function createHomeProjectsController(home: HomeController) {
       recentlyClosed: home.project.recentlyClosed,
       homedir: home.project.homedir,
       select: (conn: ServerConnection.Any, directory: string) => {
-        if (authenticate(conn, () => home.project.select(conn, directory))) return
+        if (authenticate(conn, (next) => home.project.select(next, directory))) return
         home.project.select(conn, directory)
       },
       add: home.project.add,
       openNewSession: (conn: ServerConnection.Any, directory: string) => {
-        if (authenticate(conn, () => home.project.openProjectNewSession(conn, directory))) return
+        if (authenticate(conn, (next) => home.project.openProjectNewSession(next, directory))) return
         home.project.openProjectNewSession(conn, directory)
       },
       canImportSession: !!platform.openAttachmentPickerDialog,
@@ -164,7 +165,7 @@ export function createHomeProjectsController(home: HomeController) {
           .forEach((directory) => notification.project.markViewed(directory))
       },
       choose: (conn: ServerConnection.Any) => {
-        if (authenticate(conn, () => choose(conn))) return
+        if (authenticate(conn, (next) => choose(next))) return
 
         if (home.server.health(conn)?.healthy === false) return
         choose(conn)
