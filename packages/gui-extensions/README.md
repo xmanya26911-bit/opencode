@@ -194,6 +194,8 @@ Pairing's shipping page uses a query, not `createLatest`. It passes the query's 
 const local = useQuery(() => ({
   queryKey: [ctx.id, "local"],
   queryFn: (input) => props.client.info({ signal: input.signal }),
+  // Asks again each time the page opens: the guidance below tells the user to change the hostname and reopen Pairing.
+  gcTime: 0,
 }))
 ```
 
@@ -449,21 +451,24 @@ import { Ipc } from "../sdk"
 
 export const PairingInfo = Schema.Struct({ urls: Schema.Array(Schema.String) })
 
+/** A single-use code for an `/auth/connect/:code` link, and the seconds until the server forgets it. */
+export const PairingCode = Schema.Struct({ code: Schema.String, expiresIn: Schema.Number })
+
 /** Pairs other devices with this machine's local server and keeps its display awake. */
 export const Pairing = Ipc.define({
   id: "pairing",
   methods: {
     /** The local server's advertised URLs. */
     info: { output: PairingInfo },
-    /** A single-use code for an `/auth/connect/:code` link. */
-    code: { output: Schema.String },
+    /** A new pairing code. */
+    code: { output: PairingCode },
     screenActive: { output: Schema.Boolean },
     setScreenActive: { input: Schema.Boolean },
   },
 })
 ```
 
-2. **Write the definition.** Pairing provides its Ipc, so its window entry reads it as `ctx.uses.pairing` with no second declaration. Whether main keeps the display awake is a main store, imported once from the key the desktop kept it under before.
+2. **Write the definition.** Pairing provides its Ipc, so its window entry reads it as `ctx.uses.pairing` with no second declaration. Whether main keeps the display awake is a main store, imported once from the key the desktop kept it under before. The addresses pairing links use are a window store, which the settings page reads.
 
 <!-- source: src/pairing/index.ts -->
 
@@ -479,6 +484,8 @@ export default Extension.define({
   stores: {
     // Whether main keeps the display awake; stored before in the desktop's own settings namespace.
     keepScreenActive: Store.main(Schema.Boolean, false, { state: ["opencode.settings", "keepScreenActive"] }),
+    // An address of this computer the server cannot see (a VPN, tunnel or proxy), and the address links use.
+    links: Store.global(Schema.Struct({ custom: Schema.String, selected: Schema.String }), { custom: "", selected: "" }),
   },
   i18n: { en },
 })
@@ -528,7 +535,11 @@ const setup: MainSetup<typeof definition> = (ctx) => {
 
   ctx.provide(Pairing, {
     info: async () => ({ urls: (await (await client()).server.info()).urls }),
-    code: async () => (await (await client()).server.pair()).code,
+    code: async () => {
+      const pairing = await (await client()).server.pair()
+
+      return { code: pairing.code, expiresIn: pairing.expires_in }
+    },
     screenActive: () => blocker.id !== undefined && powerSaveBlocker.isStarted(blocker.id),
     setScreenActive: (enabled) => keepScreenActive(enabled),
   })

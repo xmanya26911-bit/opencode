@@ -37,7 +37,11 @@ const setup: MainSetup<typeof definition> = (ctx) => {
 
   ctx.provide(Pairing, {
     info: async () => ({ urls: (await (await client()).server.info()).urls }),
-    code: async () => (await (await client()).server.pair()).code,
+    code: async () => {
+      const pairing = await (await client()).server.pair()
+
+      return { code: pairing.code, expiresIn: pairing.expires_in }
+    },
     screenActive: () => blocker.id !== undefined && powerSaveBlocker.isStarted(blocker.id),
     setScreenActive: (enabled) => keepScreenActive(enabled),
   })
