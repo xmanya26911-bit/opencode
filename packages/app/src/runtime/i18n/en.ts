@@ -349,6 +349,7 @@ export const dict = {
   "server.connect.scan": "Scan QR code",
   "server.connect.scan.description": "Point your camera at the QR code shown by opencode pair.",
   "server.connect.scan.invalid": "This is not an OpenCode pairing code. Scan the code shown by opencode pair.",
+  "server.connect.scan.failed": "This browser could not read the QR code. Enter your connection details manually.",
   "server.connect.link.expired": "This pairing link expired or was already used. Run opencode pair to get a new one.",
   "server.connect.link.unreachable":
     "Could not reach {{url}}. Check that this device can reach the server, then try again.",

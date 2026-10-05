@@ -42,7 +42,17 @@ export function PairingScanner(props: { redeem: RedeemPairing; onScan: (link: st
           setState("error", redeemed?.error ?? language.t("server.connect.scan.invalid"))
         })
       },
-      { preferredCamera: "environment", maxScansPerSecond: 10, returnDetailedScanResult: true },
+      {
+        preferredCamera: "environment",
+        maxScansPerSecond: 10,
+        returnDetailedScanResult: true,
+        // QrScanner only logs a decoder that fails (for example, a worker the page may not start), so the preview
+        // would look like it is still scanning.
+        onDecodeError: (error) => {
+          if (error === QrScanner.NO_QR_CODE_FOUND || state.redeeming) return
+          setState("error", language.t("server.connect.scan.failed"))
+        },
+      },
     )
 
     // Terminal QR codes can be light-on-dark depending on the terminal theme.
