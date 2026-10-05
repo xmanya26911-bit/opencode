@@ -313,7 +313,6 @@ export const dict = {
   "dialog.directory.readError": "Bu klasör okunamıyor",
 
   "dialog.server.add.title": "Sunucu ekle",
-  "dialog.server.add.url": "Sunucu URL'si",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Sunucuya bağlanılamadı",
   "dialog.server.add.checking": "Kontrol ediliyor…",
@@ -856,11 +855,9 @@ export const dict = {
   "server.status.authentication": "Kimlik doğrulama gerekli",
   "mcp.auth.interactiveForm": "MCP sunucusu {{name}} etkileşimli bir kimlik doğrulama formu gerektirir",
   "server.connect.title": "Bir sunucuya bağlanın",
-  "server.connect.description": "Başlamak için sunucu adresinizi ve şifrenizi girin.",
   "server.connect.button": "Bağlan",
   "server.connect.address.invalid": "Geçerli bir HTTP veya HTTPS sunucu adresi girin.",
   "server.connect.failed": "Bağlantı kurulamadı. Sunucu adresini ve şifreyi kontrol edip tekrar deneyin.",
-  "server.connect.pair.description": "Bağlantı ayrıntılarınızı almak için bilgisayarınızda bu komutu çalıştırın.",
   "server.connect.scan": "QR kodunu tarayın",
   "server.connect.scan.description": "Kameranızı opencode pair tarafından gösterilen QR koduna doğrultun.",
   "server.connect.scan.invalid":
@@ -869,7 +866,6 @@ export const dict = {
   "server.connect.camera.starting": "Kamera açılıyor…",
   "server.connect.mixedContent":
     "Bu HTTP sunucusuna bir HTTPS sayfasından bağlanılamadı. Bunun yerine HTTPS sunucu adresini kullanın.",
-  "server.connect.camera.insecure": "QR taraması, bu sayfanın HTTPS veya localhost üzerinden açılmasını gerektirir.",
   "server.connect.camera.unavailable":
     "Bu tarayıcıda kamera mevcut değil. Bağlantı ayrıntılarınızı manuel olarak girin.",
   "server.connect.camera.error":

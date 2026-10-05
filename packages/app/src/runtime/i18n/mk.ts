@@ -276,7 +276,6 @@ export const dict = {
   "dialog.directory.parent": "Родител",
   "dialog.directory.readError": "Не може да се прочита оваа папка",
   "dialog.server.add.title": "Додај сервер",
-  "dialog.server.add.url": "Адреса на серверот",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Не може да се поврзе со серверот",
   "dialog.server.add.checking": "Се проверува…",
@@ -790,13 +789,10 @@ export const dict = {
   "common.color.gray": "сива",
   "mcp.auth.interactiveForm": "MCP сервер {{name}} бара интерактивна форма за автентикација",
   "server.connect.title": "Поврзи се со сервер",
-  "server.connect.description": "Внесете ја вашата адреса на серверот и лозинка за да започнете.",
   "server.connect.button": "Поврзи се",
   "server.connect.address.invalid": "Внесете валидна HTTP или HTTPS адреса на серверот.",
   "server.connect.failed":
     "Не можеше да се поврзе. Проверете ја адресата на серверот и лозинката, потоа обидете се повторно.",
-  "server.connect.pair.description":
-    "Извршете ја оваа команда на вашиот компјутер за да ги добиете деталите за вашата конекција.",
   "server.connect.scan": "Скенирај QR код",
   "server.connect.scan.description": "Насочете ја вашата камера кон QR кодот прикажан од opencode pair.",
   "server.connect.scan.invalid": "Ова не е OpenCode паринг код. Скенирајте го кодот прикажан од opencode pair.",
@@ -804,7 +800,6 @@ export const dict = {
   "server.connect.camera.starting": "Отворање на камерата…",
   "server.connect.mixedContent":
     "Не можевте да се поврзете на овој HTTP сервер од HTTPS страница. Користете HTTPS сервер адреса наместо тоа.",
-  "server.connect.camera.insecure": "Скенирањето на QR бара отворање на оваа страница преку HTTPS или на localhost.",
   "server.connect.camera.unavailable":
     "Нема камера достапна за овој прелистувач. Внесете ги деталите за вашата конекција рачно.",
   "server.connect.camera.error":

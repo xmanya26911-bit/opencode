@@ -279,7 +279,6 @@ export const dict = {
   "dialog.directory.parent": "Folder nadrzędny",
   "dialog.directory.readError": "Nie można odczytać tego folderu",
   "dialog.server.add.title": "Dodaj serwer",
-  "dialog.server.add.url": "Adres URL serwera",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Nie można połączyć się z serwerem",
   "dialog.server.add.checking": "Sprawdzanie…",
@@ -816,11 +815,9 @@ export const dict = {
   "common.color.gray": "szary",
   "mcp.auth.interactiveForm": "Serwer MCP {{name}} wymaga interaktywnego formularza uwierzytelniania",
   "server.connect.title": "Połącz się z serwerem",
-  "server.connect.description": "Wprowadź adres serwera i hasło, aby rozpocząć.",
   "server.connect.button": "Połącz",
   "server.connect.address.invalid": "Wprowadź prawidłowy adres serwera HTTP lub HTTPS.",
   "server.connect.failed": "Nie można się połączyć. Sprawdź adres serwera i hasło, a następnie spróbuj ponownie.",
-  "server.connect.pair.description": "Uruchom to polecenie na swoim komputerze, aby uzyskać szczegóły połączenia.",
   "server.connect.scan": "Zeskanuj kod QR",
   "server.connect.scan.description": "Skieruj kamerę na kod QR pokazany przez sparowanie opencode.",
   "server.connect.scan.invalid": "To nie jest kod parowania OpenCode. Zeskanuj kod pokazany przez sparowanie opencode.",
@@ -828,7 +825,6 @@ export const dict = {
   "server.connect.camera.starting": "Otwieranie kamery…",
   "server.connect.mixedContent":
     "Nie można połączyć się z tym serwerem HTTP z strony HTTPS. Zamiast tego użyj adresu serwera HTTPS.",
-  "server.connect.camera.insecure": "Skanowanie QR wymaga otwarcia tej strony przez HTTPS lub na localhost.",
   "server.connect.camera.unavailable": "Ta przeglądarka nie ma dostępu do kamery. Wprowadź dane połączenia ręcznie.",
   "server.connect.camera.error":
     "Nie udało się otworzyć kamery. Zezwól na dostęp do kamery lub wprowadź dane połączenia ręcznie.",

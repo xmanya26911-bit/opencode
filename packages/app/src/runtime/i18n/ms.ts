@@ -284,7 +284,6 @@ export const dict = {
   "dialog.directory.parent": "Induk",
   "dialog.directory.readError": "Tidak dapat membaca folder ini",
   "dialog.server.add.title": "Tambah pelayan",
-  "dialog.server.add.url": "Alamat pelayan",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Tidak dapat menyambung ke pelayan",
   "dialog.server.add.checking": "Sedang menyemak…",
@@ -791,11 +790,9 @@ export const dict = {
   "common.color.gray": "kelabu",
   "mcp.auth.interactiveForm": "Pelayan MCP {{name}} memerlukan borang pengesahan interaktif",
   "server.connect.title": "Sambung ke pelayan",
-  "server.connect.description": "Masukkan alamat pelayan dan kata laluan anda untuk memulakan.",
   "server.connect.button": "Sambung",
   "server.connect.address.invalid": "Masukkan alamat pelayan HTTP atau HTTPS yang sah.",
   "server.connect.failed": "Tidak dapat menyambung. Semak alamat pelayan dan kata laluan, kemudian cuba lagi.",
-  "server.connect.pair.description": "Jalankan arahan ini pada komputer anda untuk mendapatkan butiran sambungan anda.",
   "server.connect.scan": "Imbas kod QR",
   "server.connect.scan.description": "Tujukan kamera anda ke kod QR yang dipaparkan oleh pasangan opencode.",
   "server.connect.scan.invalid": "Ini bukan kod pasangan OpenCode. Imbas kod yang ditunjukkan oleh pasangan opencode.",
@@ -803,7 +800,6 @@ export const dict = {
   "server.connect.camera.starting": "Membuka kamera…",
   "server.connect.mixedContent":
     "Tidak dapat sambung ke pelayan HTTP ini dari halaman HTTPS. Gunakan alamat pelayan HTTPS sebaliknya.",
-  "server.connect.camera.insecure": "Imbasan QR memerlukan pembukaan halaman ini melalui HTTPS atau di localhost.",
   "server.connect.camera.unavailable":
     "Tiada kamera tersedia untuk pelayar ini. Masukkan butiran sambungan anda secara manual.",
   "server.connect.camera.error":

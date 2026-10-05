@@ -300,7 +300,6 @@ export const dict = {
   "dialog.directory.parent": "Nadradený",
   "dialog.directory.readError": "Nepodarilo sa načítať tento priečinok",
   "dialog.server.add.title": "Pridať server",
-  "dialog.server.add.url": "Adresa servera",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Nepodarilo sa pripojiť k serveru",
   "dialog.server.add.checking": "Kontroluje sa…",
@@ -811,11 +810,9 @@ export const dict = {
   "common.color.gray": "šedá",
   "mcp.auth.interactiveForm": "MCP server {{name}} vyžaduje interaktívny autentifikačný formulár",
   "server.connect.title": "Pripojiť sa k serveru",
-  "server.connect.description": "Zadajte adresu servera a heslo.",
   "server.connect.button": "Pripojiť sa",
   "server.connect.address.invalid": "Zadajte platnú adresu servera s protokolom HTTP alebo HTTPS.",
   "server.connect.failed": "Nepodarilo sa pripojiť. Skontrolujte adresu servera a heslo a skúste znova.",
-  "server.connect.pair.description": "Spustite tento príkaz na svojom počítači, aby ste získali údaje na pripojenie.",
   "server.connect.scan": "Naskenujte QR kód",
   "server.connect.scan.description": "Namierte kameru na QR kód zobrazený pomocou opencode pair.",
   "server.connect.scan.invalid": "Toto nie je párovací kód OpenCode. Naskenujte kód zobrazený pomocou opencode pair.",
@@ -823,7 +820,6 @@ export const dict = {
   "server.connect.camera.starting": "Otvorenie kamery…",
   "server.connect.mixedContent":
     "Nie je možné pripojiť sa k tomuto HTTP serveru z HTTPS stránky. Namiesto toho použite adresu HTTPS.",
-  "server.connect.camera.insecure": "Na skenovanie QR je potrebné otvoriť túto stránku cez HTTPS alebo na localhoste.",
   "server.connect.camera.unavailable":
     "Tento prehliadač nemá k dispozícii žiadnu kameru. Zadajte údaje na pripojenie ručne.",
   "server.connect.camera.error":

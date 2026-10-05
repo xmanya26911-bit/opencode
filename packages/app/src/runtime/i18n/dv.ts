@@ -281,7 +281,6 @@ export const dict = {
   "dialog.directory.parent": "ބެލެނިވެރިޔާއެވެ",
   "dialog.directory.readError": "މި ފޯލްޑަރ ކިޔަން ނުކުޅެދިއްޖެއެވެ",
   "dialog.server.add.title": "ސަރވަރ އިތުރުކުރުން",
-  "dialog.server.add.url": "ސަރވަރ އެޑްރެސް",
   "dialog.server.add.placeholder": "http://localhost:4096 އެވެ",
   "dialog.server.add.error": "ސަރވަރ އާއި ގުޅެވޭ ގޮތެއް ނުވިއެވެ",
   "dialog.server.add.checking": "ޗެކް ކުރަމުން…",
@@ -811,12 +810,10 @@ export const dict = {
   "common.color.gray": "އަޅިކުލަ",
   "mcp.auth.interactiveForm": "MCP ސަރވަރ \u2068{{name}}\u2069 އަށް ބޭނުންވަނީ އިންޓަރެކްޓިވް އޮތެންޓިކޭޝަން ފޯމެކެވެ",
   "server.connect.title": "ސަރވަރ އަކަށް ގުޅާށެވެ",
-  "server.connect.description": "ފަށަން ސަރވަރ އެޑްރެހާއި ޕާސްވޯޑް ލިޔެލާށެވެ.",
   "server.connect.button": "ގުޅުވުން",
   "server.connect.address.invalid": "ސައްހަ HTTP ނުވަތަ HTTPS ސަރވަރ އެޑްރެހެއް ލިޔެލާށެވެ.",
   "server.connect.failed":
     "ގުޅެވޭ ގޮތެއް ނުވިއެވެ. ސަރވަރ އެޑްރެހާއި ޕާސްވޯޑް ޗެކްކޮށްލުމަށްފަހު އަލުން މަސައްކަތް ކުރާށެވެ.",
-  "server.connect.pair.description": "ކަނެކްޝަންގެ ތަފްސީލު ހޯދުމަށްޓަކައި ކޮމްޕިއުޓަރުގައި މި ކޮމާންޑް ހިންގާށެވެ.",
   "server.connect.scan": "QR ކޯޑް ސްކޭން ކުރާށެވެ",
   "server.connect.scan.description": "އޮޕަންކޯޑް ޖޯޑުން ދައްކާ QR ކޯޑަށް ކެމެރާ އިޝާރާތް ކުރާށެވެ.",
   "server.connect.scan.invalid": "މިއީ OpenCode ޖޯޑު ކޯޑެއް ނޫނެވެ. އޮޕަންކޯޑް ޕެއާ އިން ދައްކާ ކޯޑް ސްކޭން ކުރާށެވެ.",
@@ -824,8 +821,6 @@ export const dict = {
   "server.connect.camera.starting": "ކެމެރާ ހުޅުވަނީ...",
   "server.connect.mixedContent":
     "HTTPS ޕޭޖަކުން މި HTTP ސަރވަރ އާއި ގުޅޭ ގޮތެއް ނުވިއެވެ. އޭގެ ބަދަލުގައި HTTPS ސަރވަރ އެޑްރެހެއް ބޭނުން ކުރާށެވެ.",
-  "server.connect.camera.insecure":
-    "QR ސްކޭން ކުރުމަށް މި ޕޭޖް ހުޅުވަން ޖެހެނީ HTTPS ގެ މައްޗަށް ނުވަތަ ލޯކަލްހޯސްޓް އިންނެވެ.",
   "server.connect.camera.unavailable":
     "މި ބްރައުޒާއަށް އެއްވެސް ކެމެރާއެއް ނުލިބެއެވެ. ކަނެކްޝަންގެ ތަފްސީލުތައް އަމިއްލައަށް ލިޔެލާށެވެ.",
   "server.connect.camera.error":

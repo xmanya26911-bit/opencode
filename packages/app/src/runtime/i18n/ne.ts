@@ -280,7 +280,6 @@ export const dict = {
   "dialog.directory.parent": "अभिभावक",
   "dialog.directory.readError": "यो फोल्डर पढ्न असमर्थ",
   "dialog.server.add.title": "सर्भर थप्नुहोस्",
-  "dialog.server.add.url": "सर्भर ठेगाना",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "सर्भरमा जडान गर्न सकिएन",
   "dialog.server.add.checking": "जाँच गर्दै…",
@@ -793,11 +792,9 @@ export const dict = {
   "common.color.gray": "खैरो",
   "mcp.auth.interactiveForm": "MCP सर्भर {{name}} लाई अन्तरक्रियात्मक प्रमाणीकरण फारम चाहिन्छ",
   "server.connect.title": "सर्भरमा जडान गर्नुहोस्",
-  "server.connect.description": "सुरु गर्न आफ्नो सर्भर ठेगाना र पासवर्ड प्रविष्ट गर्नुहोस्।",
   "server.connect.button": "जडान गर्नुहोस्",
   "server.connect.address.invalid": "मान्य HTTP वा HTTPS सर्भर ठेगाना प्रविष्ट गर्नुहोस्।",
   "server.connect.failed": "जडान हुन सकेन। सर्भर ठेगाना र पासवर्ड जाँच गर्नुहोस्, त्यसपछि फेरि प्रयास गर्नुहोस्।",
-  "server.connect.pair.description": "तपाइँको जडान विवरण प्राप्त गर्न तपाइँको कम्प्युटरमा यो आदेश चलाउनुहोस्।",
   "server.connect.scan": "QR कोड स्क्यान गर्नुहोस्",
   "server.connect.scan.description": "ओपनकोड जोडीद्वारा देखाइएको QR कोडमा आफ्नो क्यामेरा देखाउनुहोस्।",
   "server.connect.scan.invalid": "यो एक OpenCode जोडा कोड होइन। ओपनकोड जोडी द्वारा देखाइएको कोड स्क्यान गर्नुहोस्।",
@@ -805,7 +802,6 @@ export const dict = {
   "server.connect.camera.starting": "क्यामेरा खोल्दै…",
   "server.connect.mixedContent":
     "HTTPS पृष्ठबाट यो HTTP सर्भरमा जडान गर्न सकिएन। यसको सट्टा HTTPS सर्भर ठेगाना प्रयोग गर्नुहोस्।",
-  "server.connect.camera.insecure": "QR स्क्यानिङका लागि यो पृष्ठ HTTPS वा लोकलहोस्टमा खोल्न आवश्यक छ।",
   "server.connect.camera.unavailable":
     "यो ब्राउजरमा कुनै क्यामेरा उपलब्ध छैन। आफ्नो जडान विवरणहरू म्यानुअल रूपमा प्रविष्ट गर्नुहोस्।",
   "server.connect.camera.error":

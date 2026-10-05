@@ -274,7 +274,6 @@ export const dict = {
   "dialog.directory.parent": "Foreldur",
   "dialog.directory.readError": "Tað ber ikki til at lesa hesa mappuna",
   "dialog.server.add.title": "Legg ambætara til",
-  "dialog.server.add.url": "Ambætaraadressa",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Kundi ikki seta samband við ambætaran",
   "dialog.server.add.checking": "Kanna…",
@@ -775,11 +774,9 @@ export const dict = {
   "server.status.authentication": "Staðfesting krevst",
   "mcp.auth.interactiveForm": "MCP ambætarin {{name}} krevur eitt samvirkið sannroyndarblað",
   "server.connect.title": "Set samband við ein ambætara",
-  "server.connect.description": "Skriva tína ambætaraadressu og loyniorð fyri at byrja.",
   "server.connect.button": "Samband",
   "server.connect.address.invalid": "Skriva eina gylduga HTTP ella HTTPS ambætaraadressu.",
   "server.connect.failed": "Fekk ikki samband. Kanna ambætaraadressuna og loyniorðið, og royn síðani aftur.",
-  "server.connect.pair.description": "Koyr hesa skipanina á tínari teldu fyri at fáa tínar sambandsupplýsingar.",
   "server.connect.scan": "Skanna QR-kotu",
   "server.connect.scan.description": "Peika myndatólið á QR-kotuna, sum opencode pair vísir.",
   "server.connect.scan.invalid": "Hetta er ikki ein OpenCode paringarkoda. Skanna kotuna, sum opencode pair vísir.",
@@ -787,7 +784,6 @@ export const dict = {
   "server.connect.camera.starting": "Opna myndatól...",
   "server.connect.mixedContent":
     "Kundi ikki seta samband við hendan HTTP ambætaran frá eini HTTPS síðu. Brúka eina HTTPS ambætaraadressu ístaðin.",
-  "server.connect.camera.insecure": "QR-skanning krevur, at tú letur hesa síðuna upp yvir HTTPS ella á localhost.",
   "server.connect.camera.unavailable":
     "Einki myndatól er tøkt til henda kaga. Skriva tínar sambandsupplýsingar manuelt.",
   "server.connect.camera.error":

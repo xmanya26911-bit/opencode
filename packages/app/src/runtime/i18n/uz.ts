@@ -276,7 +276,6 @@ export const dict = {
   "dialog.directory.parent": "Ota-ona",
   "dialog.directory.readError": "Bu jildni oʻqib boʻlmadi",
   "dialog.server.add.title": "Server qo'shish",
-  "dialog.server.add.url": "Server manzili",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Serverga ulanib boʻlmadi",
   "dialog.server.add.checking": "Tekshirilmoqda…",
@@ -793,12 +792,9 @@ export const dict = {
   "common.color.gray": "kulrang",
   "mcp.auth.interactiveForm": "MCP server {{name}} interaktiv autentifikatsiya shaklini talab qiladi",
   "server.connect.title": "Serverga ulaning",
-  "server.connect.description": "Boshlash uchun server manzili va parolni kiriting.",
   "server.connect.button": "Ulanish",
   "server.connect.address.invalid": "Yaroqli HTTP yoki HTTPS server manzilini kiriting.",
   "server.connect.failed": "Ulanib bo‘lmadi. Server manzili va parolni tekshiring, keyin qayta urinib ko'ring.",
-  "server.connect.pair.description":
-    "Ulanish ma'lumotlarini olish uchun ushbu buyruqni kompyuteringizda ishga tushiring.",
   "server.connect.scan": "QR kodini skanerlang",
   "server.connect.scan.description": "Kamerani opencode pair koʻrsatgan QR kodga qarating.",
   "server.connect.scan.invalid": "Bu OpenCode ulash kodi emas. opencode pair koʻrsatgan kodni skanerlang.",
@@ -806,7 +802,6 @@ export const dict = {
   "server.connect.camera.starting": "Kamera ochilmoqda…",
   "server.connect.mixedContent":
     "HTTPS sahifasidan ushbu HTTP serveriga ulanib boʻlmadi. Buning o'rniga HTTPS server manzilidan foydalaning.",
-  "server.connect.camera.insecure": "QR skanerlash uchun bu sahifani HTTPS yoki localhost orqali ochish kerak.",
   "server.connect.camera.unavailable":
     "Bu brauzerda hech qanday kamera mavjud emas. Ulanish ma'lumotlarini qo'lda kiriting.",
   "server.connect.camera.error":

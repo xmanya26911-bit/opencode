@@ -276,7 +276,6 @@ export const dict = {
   "dialog.directory.parent": "Родител",
   "dialog.directory.readError": "Тази папка не може да се прочете",
   "dialog.server.add.title": "Добавете сървър",
-  "dialog.server.add.url": "Адрес на сървъра",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Не може да се свърже със сървъра",
   "dialog.server.add.checking": "Проверка…",
@@ -793,11 +792,9 @@ export const dict = {
   "common.color.gray": "сиво",
   "mcp.auth.interactiveForm": "MCP сървърът {{name}} изисква интерактивен формуляр за удостоверяване",
   "server.connect.title": "Свързване със сървър",
-  "server.connect.description": "Въведете адреса и паролата на сървъра, за да започнете.",
   "server.connect.button": "Свързване",
   "server.connect.address.invalid": "Въведете валиден HTTP или HTTPS адрес на сървър.",
   "server.connect.failed": "Свързването е неуспешно. Проверете адреса и паролата на сървъра и опитайте отново.",
-  "server.connect.pair.description": "Изпълнете тази команда на компютъра си, за да получите данните за връзка.",
   "server.connect.scan": "Сканиране на QR код",
   "server.connect.scan.description": "Насочете камерата към QR кода, показан от opencode pair.",
   "server.connect.scan.invalid": "Това не е код за сдвояване с OpenCode. Сканирайте кода, показан от opencode pair.",
@@ -805,8 +802,6 @@ export const dict = {
   "server.connect.camera.starting": "Отваряне на камерата…",
   "server.connect.mixedContent":
     "Не може да се осъществи връзка с този HTTP сървър от HTTPS страница. Използвайте HTTPS адрес на сървъра.",
-  "server.connect.camera.insecure":
-    "Сканирането на QR код изисква тази страница да е отворена чрез HTTPS или на localhost.",
   "server.connect.camera.unavailable": "Няма достъпна камера за този браузър. Въведете ръчно данните за връзка.",
   "server.connect.camera.error":
     "Камерата не можа да бъде отворена. Разрешете достъпа до нея или въведете ръчно данните за връзка.",

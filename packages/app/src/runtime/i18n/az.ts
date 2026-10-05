@@ -277,7 +277,6 @@ export const dict = {
   "dialog.directory.parent": "Üst qovluq",
   "dialog.directory.readError": "Bu qovluğu oxumaq mümkün deyil",
   "dialog.server.add.title": "Server əlavə et",
-  "dialog.server.add.url": "Server ünvanı",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Serverə qoşulmaq mümkün olmadı",
   "dialog.server.add.checking": "Yoxlanılır…",
@@ -795,11 +794,9 @@ export const dict = {
   "common.color.gray": "boz",
   "mcp.auth.interactiveForm": "MCP server {{name}} interaktiv autentifikasiya forması tələb edir",
   "server.connect.title": "Serverə qoşulun",
-  "server.connect.description": "Başlamaq üçün server ünvanınızı və şifrənizi daxil edin.",
   "server.connect.button": "Qoşulun",
   "server.connect.address.invalid": "Etibarlı HTTP və ya HTTPS server ünvanını daxil edin.",
   "server.connect.failed": "Bağlana bilmədik. Server ünvanını və şifrəni yoxlayın, sonra yenidən cəhd edin.",
-  "server.connect.pair.description": "Bağlantı məlumatlarınızı almaq üçün bu əmri kompüterinizdə işlədin.",
   "server.connect.scan": "QR kodu skan edin",
   "server.connect.scan.description": "Kameranızı opencode pair tərəfindən göstərilən QR koda yönəldin.",
   "server.connect.scan.invalid": "Bu, OpenCode qoşulma kodu deyil. opencode pair tərəfindən göstərilən kodu skan edin.",
@@ -807,8 +804,6 @@ export const dict = {
   "server.connect.camera.starting": "Kamera açılır…",
   "server.connect.mixedContent":
     "Bu HTTPS səhifəsindən bu HTTP serverinə qoşulmaq mümkün olmadı. Bunun əvəzinə HTTPS server ünvanından istifadə edin.",
-  "server.connect.camera.insecure":
-    "QR skan edilməsi üçün bu səhifəni HTTPS üzərindən və ya localhost-da açmaq tələb olunur.",
   "server.connect.camera.unavailable":
     "Bu brauzer üçün heç bir kamera mövcud deyil. Bağlantı məlumatlarınızı əl ilə daxil edin.",
   "server.connect.camera.error":

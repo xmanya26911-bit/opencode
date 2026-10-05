@@ -208,7 +208,6 @@ export const dict = {
   "dialog.directory.parent": "상위 폴더",
   "dialog.directory.readError": "이 폴더를 읽을 수 없습니다",
   "dialog.server.add.title": "서버 추가",
-  "dialog.server.add.url": "서버 URL",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "서버에 연결할 수 없습니다",
   "dialog.server.add.checking": "확인 중…",
@@ -799,11 +798,9 @@ export const dict = {
   "common.color.gray": "회색",
   "mcp.auth.interactiveForm": "MCP 서버 {{name}}에는 대화형 인증 양식이 필요합니다",
   "server.connect.title": "서버에 연결",
-  "server.connect.description": "시작하려면 서버 주소와 비밀번호를 입력하세요.",
   "server.connect.button": "연결",
   "server.connect.address.invalid": "유효한 HTTP 또는 HTTPS 서버 주소를 입력하세요.",
   "server.connect.failed": "연결할 수 없습니다. 서버 주소와 비밀번호를 확인한 후 다시 시도하세요.",
-  "server.connect.pair.description": "컴퓨터에서 이 명령어를 실행하여 연결 세부 정보를 확인하세요.",
   "server.connect.scan": "QR 코드 스캔",
   "server.connect.scan.description": "opencode pair에서 표시된 QR 코드를 카메라로 가리키세요.",
   "server.connect.scan.invalid":
@@ -812,7 +809,6 @@ export const dict = {
   "server.connect.camera.starting": "카메라 열기…",
   "server.connect.mixedContent":
     "HTTPS 페이지에서 이 HTTP 서버에 연결할 수 없습니다. 대신 HTTPS 서버 주소를 사용하세요.",
-  "server.connect.camera.insecure": "QR 스캔을 위해서는 HTTPS를 통해 이 페이지를 열거나 로컬호스트에서 열어야 합니다.",
   "server.connect.camera.unavailable":
     "이 브라우저에서 사용할 수 있는 카메라가 없습니다. 연결 세부 정보를 수동으로 입력하세요.",
   "server.connect.camera.error":

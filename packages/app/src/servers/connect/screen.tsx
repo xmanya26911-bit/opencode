@@ -7,10 +7,11 @@ import { Wordmark } from "@opencode/ui/wordmark"
 import { useLanguage } from "@/runtime/i18n/language"
 import { usePlatform } from "@/runtime/platform/platform"
 import { useCheckServerHealth } from "@/runtime/server/health"
-import { useServers } from "@/runtime/server/registry"
-import { pairingLink, redeemPairingLink, serverAddress } from "./pairing"
+import { ServerConnection, useServers } from "@/runtime/server/registry"
+import { serverAddress } from "./pairing"
+import { useRedeemPairing } from "./redeem"
 import { isMixedContent } from "./browser"
-import { createCameraAvailability } from "./camera"
+import { cameraHint, createCameraAvailability } from "./camera"
 import "./screen.css"
 
 const PairingScanner = lazy(() => import("./scanner").then((module) => ({ default: module.PairingScanner })))
@@ -20,38 +21,52 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
   const platform = usePlatform()
   const servers = useServers()
   const check = useCheckServerHealth()
+  const redeem = useRedeemPairing()
   const camera = createCameraAvailability()
   const [state, setState] = createStore({ url: props.url ?? "", password: "", error: "", scanning: false })
+
   const connectionError = () =>
     language.t(
       platform.platform === "web" && isMixedContent(location.href, state.url)
         ? "server.connect.mixedContent"
         : "server.connect.failed",
     )
+
   const request = useMutation(() => ({
     mutationFn: async () => {
-      const link = pairingLink(state.url)
-      if (link) {
-        const redeemed = await redeemPairingLink(link)
-        if (!redeemed) {
-          setState("error", language.t("server.connect.link.expired"))
-          return
-        }
-        // Keep the token in the form so a failed connection check can retry without the spent code.
-        setState({ url: link.url, password: redeemed.password })
+      const redeemed = await redeem(state.url)
+
+      if (redeemed && "error" in redeemed) {
+        setState("error", redeemed.error)
+
+        return
       }
+
+      // Keep the token in the form so a failed connection check can retry without the spent code.
+      if (redeemed) setState({ url: redeemed.pairing.url, password: redeemed.pairing.password })
       const url = serverAddress(state.url)
+
       if (!url) {
         setState("error", language.t("server.connect.address.invalid"))
+
         return
       }
+
       const http = { url, password: state.password || undefined }
       const result = await check(http)
+
       if (!result.healthy) {
         setState("error", connectionError())
+
         return
       }
-      servers.add({ type: "http", http })
+
+      // Signing in again keeps the name the user gave this server.
+      const existing = servers.list.find(
+        (server): server is ServerConnection.Http => server.type === "http" && server.http.url === url,
+      )
+
+      servers.add(existing ? { ...existing, http } : { type: "http", http })
     },
     onError: () => setState("error", connectionError()),
   }))
@@ -64,7 +79,7 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
         </div>
         <header>
           <h1 id="server-connect-title">{language.t("server.connect.title")}</h1>
-          <p>{language.t("server.connect.description")}</p>
+          <p>{language.t("server.connect.description.pairing")}</p>
         </header>
         <Show
           when={!state.scanning}
@@ -86,13 +101,14 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
           <form
             onSubmit={(event) => {
               event.preventDefault()
+
               if (request.isPending) return
               setState("error", "")
               request.mutate()
             }}
           >
             <div class="server-connect-field">
-              <label for="server-connect-url">{language.t("dialog.server.add.url")}</label>
+              <label for="server-connect-url">{language.t("server.connect.address")}</label>
               <TextInput
                 id="server-connect-url"
                 name="server"
@@ -134,27 +150,22 @@ export function ConnectServerScreen(props: { url?: string } = {}) {
             </Button>
           </form>
           <Show when={platform.platform === "web"}>
-            <Button
-              variant="neutral"
-              size="large"
-              disabled={request.isPending || !camera.available.latest}
-              aria-describedby={
-                !camera.available.latest && !camera.available.loading ? "server-connect-camera-unavailable" : undefined
-              }
-              onClick={() => setState("scanning", true)}
+            <Show
+              when={camera.available.latest || camera.available.loading}
+              fallback={<p>{language.t(cameraHint())}</p>}
             >
-              {language.t("server.connect.scan")}
-            </Button>
-            <Show when={!camera.available.latest && !camera.available.loading}>
-              <p id="server-connect-camera-unavailable">
-                {language.t(
-                  window.isSecureContext ? "server.connect.camera.unavailable" : "server.connect.camera.insecure",
-                )}
-              </p>
+              <Button
+                variant="neutral"
+                size="large"
+                disabled={request.isPending || !camera.available.latest}
+                onClick={() => setState("scanning", true)}
+              >
+                {language.t("server.connect.scan")}
+              </Button>
             </Show>
           </Show>
           <footer>
-            <p>{language.t("server.connect.pair.description")}</p>
+            <p>{language.t("server.connect.pair.link")}</p>
             <code dir="ltr">opencode pair</code>
           </footer>
         </Show>

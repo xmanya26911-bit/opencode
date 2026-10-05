@@ -320,7 +320,6 @@ export const dict = {
   "dialog.directory.readError": "Unable to read this folder",
 
   "dialog.server.add.title": "Add server",
-  "dialog.server.add.url": "Server address",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Could not connect to server",
   "dialog.server.add.checking": "Checking…",
@@ -331,25 +330,32 @@ export const dict = {
   "dialog.server.add.passwordPlaceholder": "password",
 
   "server.connect.title": "Connect to a server",
-  "server.connect.description": "Enter your server address and password to get started.",
+  "server.connect.description.pairing": "Paste a pairing link, or enter your server address and password.",
+  "server.connect.address": "Server address or pairing link",
   "server.connect.button": "Connect",
   "server.connect.address.invalid": "Enter a valid HTTP or HTTPS server address.",
   "server.connect.failed": "Could not connect. Check the server address and password, then try again.",
-  "server.connect.pair.description": "Run this command on your computer to get your connection details.",
+  "server.connect.pair.link": "Run this command on the server's computer to get a pairing link and QR code.",
   "server.connect.scan": "Scan QR code",
   "server.connect.scan.description": "Point your camera at the QR code shown by opencode pair.",
   "server.connect.scan.invalid": "This is not an OpenCode pairing code. Scan the code shown by opencode pair.",
   "server.connect.link.expired": "This pairing link expired or was already used. Run opencode pair to get a new one.",
+  "server.connect.link.unreachable":
+    "Could not reach {{url}}. Check that this device can reach the server, then try again.",
+  "server.connect.link.legacy":
+    "This pairing code is from an older version of OpenCode. Update OpenCode on the server, then run opencode pair again.",
   "server.connect.camera": "Pairing camera",
   "server.connect.camera.starting": "Opening camera…",
   "server.connect.mixedContent":
     "Could not connect to this HTTP server from an HTTPS page. Use an HTTPS server address instead.",
-  "server.connect.camera.insecure": "QR scanning requires opening this page over HTTPS or on localhost.",
+  "server.connect.camera.native": "To scan a QR code, use your device's camera app, or paste the pairing link above.",
   "server.connect.camera.unavailable":
     "No camera is available to this browser. Enter your connection details manually.",
   "server.connect.camera.error":
     "Could not open the camera. Allow camera access or enter your connection details manually.",
   "dialog.server.edit.title": "Edit server",
+  "dialog.server.signedOut":
+    "Your sign-in for this server is no longer valid. Paste a new pairing link, or enter the server password.",
 
   "dialog.server.menu.edit": "Edit",
   "dialog.server.menu.default": "Set as default",

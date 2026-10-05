@@ -22,13 +22,10 @@ export const dict = {
   "server.status.authentication": "Authentifizierung erforderlich",
   "mcp.auth.interactiveForm": "Der MCP-Server {{name}} erfordert ein interaktives Authentifizierungsformular",
   "server.connect.title": "Stellen Sie eine Verbindung zu einem Server her",
-  "server.connect.description": "Geben Sie Ihre Serveradresse und Ihr Passwort ein, um zu beginnen.",
   "server.connect.button": "Verbinden",
   "server.connect.address.invalid": "Geben Sie eine gültige HTTP- oder HTTPS-Serveradresse ein.",
   "server.connect.failed":
     "Es konnte keine Verbindung hergestellt werden. Überprüfen Sie die Serveradresse und das Passwort und versuchen Sie es dann erneut.",
-  "server.connect.pair.description":
-    "Führen Sie diesen Befehl auf Ihrem Computer aus, um Ihre Verbindungsdetails abzurufen.",
   "server.connect.scan": "Scannen Sie den QR-Code",
   "server.connect.scan.description": "Richten Sie Ihre Kamera auf den von opencode pair angezeigten Code QR.",
   "server.connect.scan.invalid":
@@ -37,8 +34,6 @@ export const dict = {
   "server.connect.camera.starting": "Kamera wird geöffnet…",
   "server.connect.mixedContent":
     "Es konnte keine Verbindung zu diesem HTTP-Server von einer HTTPS-Seite hergestellt werden. Verwenden Sie stattdessen eine HTTPS-Serveradresse.",
-  "server.connect.camera.insecure":
-    "Zum Scannen mit QR muss diese Seite über HTTPS oder auf localhost geöffnet werden.",
   "server.connect.camera.unavailable":
     "Für diesen Browser ist keine Kamera verfügbar. Geben Sie Ihre Verbindungsdaten manuell ein.",
   "server.connect.camera.error":
@@ -436,7 +431,6 @@ export const dict = {
   "dialog.directory.parent": "Übergeordnet",
   "dialog.directory.readError": "Dieser Ordner kann nicht gelesen werden",
   "dialog.server.add.title": "Server hinzufügen",
-  "dialog.server.add.url": "Serveradresse",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Verbindung zum Server fehlgeschlagen",
   "dialog.server.add.checking": "Prüfen…",

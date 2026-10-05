@@ -287,7 +287,6 @@ export const dict = {
   "dialog.directory.parent": "ཕ་མ།",
   "dialog.directory.readError": "སྣོད་འཛིན་འདི་ལྷག་མི་ཚུགས།",
   "dialog.server.add.title": "སར་བར་ཁ་སྐོང་འབད།",
-  "dialog.server.add.url": "སར་བར་ཁ་བྱང་།",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "སར་བར་ལུ་མཐུད་མ་ཚུགས།",
   "dialog.server.add.checking": "ཞིབ་དཔྱད་འབད་དོ།",
@@ -793,12 +792,9 @@ export const dict = {
   "server.status.authentication": "བདེན་བཤད་འབད་དགོ",
   "mcp.auth.interactiveForm": "MCP སར་བར་ {{name}} ལུ་ འབྲེལ་མཐུན་བདེན་བཤད་འབྲི་ཤོག་ཅིག་དགོཔ་ཨིན།",
   "server.connect.title": "སར་བར་ཅིག་ལུ་མཐུད།",
-  "server.connect.description": "འགོ་བཙུགས་ནིའི་དོན་ལུ་ ཁྱོད་རའི་སར་བར་ཁ་བྱང་དང་ཆོག་ཡིག་བཙུགས།",
   "server.connect.button": "མཐུད།",
   "server.connect.address.invalid": "ནུས་ཅན་ HTTP ཡང་ན་ HTTPS སར་བར་ཁ་བྱང་ཅིག་བཙུགས།",
   "server.connect.failed": "མཐུད་མ་ཚུགས། སར་བར་ཁ་བྱང་དང་ཆོག་ཡིག་ཞིབ་དཔྱད་འབད་ཞིནམ་ལས་ ལོག་སྟེ་འབད་རྩོལ་བསྐྱེད།",
-  "server.connect.pair.description":
-    "ཁྱོད་རའི་མཐུད་ལམ་རྒྱས་བཤད་ཚུ་ཐོབ་ནིའི་དོན་ལུ་ ཁྱོད་རའི་གློག་རིག་གུ་བརྡ་བཀོད་འདི་གཡོག་བཀོལ།",
   "server.connect.scan": "QR གསང་གྲངས་པར་བཤུས་",
   "server.connect.scan.description": "ཁྱོད་རའི་པར་ཆས་འདི་ opencode pair གིས་སྟོན་མི་ QR གསང་ཡིག་ལུ་སྟོན་དགོ།",
   "server.connect.scan.invalid":
@@ -807,7 +803,6 @@ export const dict = {
   "server.connect.camera.starting": "པར་ཆས་ཁ་ཕྱེ་དོ...",
   "server.connect.mixedContent":
     "HTTPS ཤོག་ལེབ་ཅིག་ལས་ HTTP སར་བར་འདི་ལུ་མཐུད་མ་ཚུགས། དེ་གི་ཚབ་ལུ་ HTTPS སར་བར་ཁ་བྱང་ཅིག་ལག་ལེན་འཐབ།",
-  "server.connect.camera.insecure": "QR པར་ལེན་འབད་ནི་ལུ་ ཤོག་ལེབ་འདི་ HTTPS ཡང་ན་ localhost གུ་ཁ་ཕྱེ་དགོཔ་ཨིན།",
   "server.connect.camera.unavailable": "བརྡ་འཚོལ་འདི་ལུ་པར་ཆས་མེད། ཁྱོད་རའི་མཐུད་ལམ་རྒྱས་བཤད་ཚུ་ལག་ཐོག་ལས་བཙུགས།",
   "server.connect.camera.error":
     "པར་ཆས་ཁ་ཕྱེ་མ་ཚུགས། པར་ཆས་འཛུལ་སྤྱོད་འབད་བཅུགཔ་ ཡང་ན་ ཁྱོད་རའི་མཐུད་ལམ་རྒྱས་བཤད་ཚུ་ལག་ཐོག་ལས་བཙུགས།",

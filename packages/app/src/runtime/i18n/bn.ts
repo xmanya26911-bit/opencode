@@ -279,7 +279,6 @@ export const dict = {
   "dialog.directory.parent": "অভিভাবক",
   "dialog.directory.readError": "এই ফোল্ডারটি পড়তে অক্ষম৷",
   "dialog.server.add.title": "সার্ভার যোগ করুন",
-  "dialog.server.add.url": "সার্ভার ঠিকানা",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "সার্ভারের সাথে সংযোগ করা যায়নি",
   "dialog.server.add.checking": "পরীক্ষা করা হচ্ছে…",
@@ -793,11 +792,9 @@ export const dict = {
   "common.color.gray": "ধূসর",
   "mcp.auth.interactiveForm": "MCP সার্ভার {{name}} একটি ইন্টারেক্টিভ প্রমাণীকরণ ফর্ম প্রয়োজন৷",
   "server.connect.title": "একটি সার্ভারের সাথে সংযোগ করুন",
-  "server.connect.description": "শুরু করতে আপনার সার্ভার ঠিকানা এবং পাসওয়ার্ড লিখুন.",
   "server.connect.button": "সংযোগ করুন",
   "server.connect.address.invalid": "একটি বৈধ HTTP বা HTTPS সার্ভার ঠিকানা লিখুন৷",
   "server.connect.failed": "সংযোগ করা যায়নি। সার্ভার ঠিকানা এবং পাসওয়ার্ড পরীক্ষা করুন, তারপর আবার চেষ্টা করুন.",
-  "server.connect.pair.description": "আপনার সংযোগের বিবরণ পেতে আপনার কম্পিউটারে এই কমান্ডটি চালান।",
   "server.connect.scan": "QR কোড স্ক্যান করুন",
   "server.connect.scan.description": "আপনার ক্যামেরাকে ওপেনকোড পেয়ার দ্বারা দেখানো QR কোডে নির্দেশ করুন৷",
   "server.connect.scan.invalid": "এটি একটি OpenCode পেয়ারিং কোড নয়৷ ওপেনকোড পেয়ার দ্বারা দেখানো কোডটি স্ক্যান করুন।",
@@ -805,7 +802,6 @@ export const dict = {
   "server.connect.camera.starting": "ক্যামেরা খোলা হচ্ছে...",
   "server.connect.mixedContent":
     "একটি HTTPS পৃষ্ঠা থেকে এই HTTP সার্ভারের সাথে সংযোগ করা যায়নি৷ পরিবর্তে একটি HTTPS সার্ভার ঠিকানা ব্যবহার করুন৷",
-  "server.connect.camera.insecure": "QR স্ক্যান করার জন্য এই পৃষ্ঠাটি HTTPS বা লোকালহোস্টে খুলতে হবে।",
   "server.connect.camera.unavailable": "এই ব্রাউজারে কোন ক্যামেরা উপলব্ধ নেই৷ ম্যানুয়ালি আপনার সংযোগ বিশদ লিখুন.",
   "server.connect.camera.error":
     "ক্যামেরা খুলতে পারিনি। ক্যামেরা অ্যাক্সেসের অনুমতি দিন বা ম্যানুয়ালি আপনার সংযোগের বিবরণ লিখুন।",

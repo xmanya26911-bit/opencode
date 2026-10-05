@@ -274,7 +274,6 @@ export const dict = {
   "dialog.directory.parent": "Părinte",
   "dialog.directory.readError": "Nu se poate citi acest folder",
   "dialog.server.add.title": "Adaugă server",
-  "dialog.server.add.url": "Adresă server",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Nu s-a putut conecta la server",
   "dialog.server.add.checking": "Se verifică…",
@@ -786,11 +785,9 @@ export const dict = {
   "server.status.authentication": "Este necesară autentificare",
   "mcp.auth.interactiveForm": "Serverul MCP {{name}} necesită un formular de autentificare interactiv",
   "server.connect.title": "Conectați-vă la un server",
-  "server.connect.description": "Introdu adresa serverului și parola pentru a începe.",
   "server.connect.button": "Conectați",
   "server.connect.address.invalid": "Introduceți o adresă validă de server HTTP sau HTTPS.",
   "server.connect.failed": "Nu s-a putut conecta. Verificați adresa serverului și parola, apoi încercați din nou.",
-  "server.connect.pair.description": "Rulați această comandă pe computer pentru a obține detaliile conexiunii.",
   "server.connect.scan": "Scanează codul QR",
   "server.connect.scan.description": "Îndreptați camera către codul QR afișat de opencode pair.",
   "server.connect.scan.invalid": "Acesta nu este un cod de asociere OpenCode. Scanați codul afișat de opencode pair.",
@@ -798,7 +795,6 @@ export const dict = {
   "server.connect.camera.starting": "Deschiderea camerei…",
   "server.connect.mixedContent":
     "Nu s-a putut conecta la acest server HTTP de pe o pagină HTTPS. Utilizați în schimb o adresă de server HTTPS.",
-  "server.connect.camera.insecure": "Scanarea QR necesită deschiderea acestei pagini prin HTTPS sau pe localhost.",
   "server.connect.camera.unavailable":
     "Nicio cameră nu este disponibilă pentru acest browser. Introduceți manual detaliile conexiunii.",
   "server.connect.camera.error":

@@ -284,7 +284,6 @@ export const dict = {
   "dialog.directory.parent": "پدر و مادر",
   "dialog.directory.readError": "خواندن این پوشه ممکن نیست",
   "dialog.server.add.title": "سرور اضافه کنید",
-  "dialog.server.add.url": "آدرس سرور",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "نمی توان به سرور متصل شد",
   "dialog.server.add.checking": "در حال بررسی…",
@@ -791,11 +790,9 @@ export const dict = {
   "server.status.authentication": "احراز هویت الزامی است",
   "mcp.auth.interactiveForm": "سرور MCP با نام \u2068{{name}}\u2069 به فرم احراز هویت تعاملی نیاز دارد",
   "server.connect.title": "اتصال به سرور",
-  "server.connect.description": "برای شروع، نشانی سرور و گذرواژه را وارد کنید.",
   "server.connect.button": "اتصال",
   "server.connect.address.invalid": "یک نشانی معتبر سرور HTTP یا HTTPS وارد کنید.",
   "server.connect.failed": "اتصال ممکن نشد. نشانی سرور و گذرواژه را بررسی کنید و دوباره تلاش کنید.",
-  "server.connect.pair.description": "برای دریافت جزئیات اتصال، این فرمان را روی رایانهٔ خود اجرا کنید.",
   "server.connect.scan": "پویش کد QR",
   "server.connect.scan.description": "دوربین را به‌سمت کد QR نمایش‌داده‌شده توسط opencode pair بگیرید.",
   "server.connect.scan.invalid": "این کد جفت‌سازی OpenCode نیست. کدی را پویش کنید که opencode pair نشان می‌دهد.",
@@ -803,7 +800,6 @@ export const dict = {
   "server.connect.camera.starting": "در حال باز کردن دوربین…",
   "server.connect.mixedContent":
     "اتصال به این سرور HTTP از صفحهٔ HTTPS ممکن نشد. به‌جای آن از نشانی سرور HTTPS استفاده کنید.",
-  "server.connect.camera.insecure": "پویش QR نیازمند باز کردن این صفحه از طریق HTTPS یا روی localhost است.",
   "server.connect.camera.unavailable": "هیچ دوربینی برای این مرورگر در دسترس نیست. جزئیات اتصال را دستی وارد کنید.",
   "server.connect.camera.error":
     "باز کردن دوربین ممکن نشد. دسترسی دوربین را مجاز کنید یا جزئیات اتصال را دستی وارد کنید.",

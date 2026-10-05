@@ -18,12 +18,10 @@ export const dict = {
   "server.status.authentication": "Godkendelse påkrævet",
   "mcp.auth.interactiveForm": "MCP server {{name}} kræver en interaktiv godkendelsesformular",
   "server.connect.title": "Opret forbindelse til en server",
-  "server.connect.description": "Indtast din serveradresse og adgangskode for at komme i gang.",
   "server.connect.button": "Forbind",
   "server.connect.address.invalid": "Indtast en gyldig HTTP- eller HTTPS-serveradresse.",
   "server.connect.failed":
     "Kunne ikke oprette forbindelse. Tjek serveradressen og adgangskoden, og prøv derefter igen.",
-  "server.connect.pair.description": "Kør denne kommando på din computer for at få dine forbindelsesdetaljer.",
   "server.connect.scan": "Scan QR kode",
   "server.connect.scan.description": "Ret dit kamera mod QR-koden vist af opencode pair.",
   "server.connect.scan.invalid": "Dette er ikke en OpenCode-parringskode. Scan koden vist af opencode pair.",
@@ -31,7 +29,6 @@ export const dict = {
   "server.connect.camera.starting": "Åbner kamera...",
   "server.connect.mixedContent":
     "Kunne ikke oprette forbindelse til denne HTTP-server fra en HTTPS-side. Brug i stedet en HTTPS-serveradresse.",
-  "server.connect.camera.insecure": "QR-scanning kræver, at denne side åbnes over HTTPS eller på localhost.",
   "server.connect.camera.unavailable":
     "Intet kamera er tilgængeligt for denne browser. Indtast dine forbindelsesoplysninger manuelt.",
   "server.connect.camera.error":
@@ -437,7 +434,6 @@ export const dict = {
   "dialog.directory.readError": "Denne mappe kan ikke læses",
 
   "dialog.server.add.title": "Tilføj en server",
-  "dialog.server.add.url": "Serveradresse",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Kunne ikke forbinde til server",
   "dialog.server.add.checking": "Tjekker…",

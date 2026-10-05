@@ -275,7 +275,6 @@ export const dict = {
   "dialog.directory.parent": "Pare",
   "dialog.directory.readError": "No es pot llegir aquesta carpeta",
   "dialog.server.add.title": "Afegeix servidor",
-  "dialog.server.add.url": "Adreça del servidor",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "No s'ha pogut connectar al servidor",
   "dialog.server.add.checking": "S'està comprovant…",
@@ -791,13 +790,10 @@ export const dict = {
   "server.status.authentication": "Cal autenticació",
   "mcp.auth.interactiveForm": "El servidor MCP {{name}} requereix un formulari d'autenticació interactiu",
   "server.connect.title": "Connecta't a un servidor",
-  "server.connect.description": "Introduïu l'adreça del servidor i la contrasenya per començar.",
   "server.connect.button": "Connecta",
   "server.connect.address.invalid": "Introduïu una adreça de servidor HTTP o HTTPS vàlida.",
   "server.connect.failed":
     "No s'ha pogut connectar. Comproveu l'adreça i la contrasenya del servidor i torneu-ho a provar.",
-  "server.connect.pair.description":
-    "Executeu aquesta ordre al vostre ordinador per obtenir els detalls de la vostra connexió.",
   "server.connect.scan": "Escaneja el codi QR",
   "server.connect.scan.description": "Apunteu la càmera al codi QR que mostra opencode pair.",
   "server.connect.scan.invalid":
@@ -806,7 +802,6 @@ export const dict = {
   "server.connect.camera.starting": "Obertura de la càmera...",
   "server.connect.mixedContent":
     "No s'ha pogut connectar a aquest servidor HTTP des d'una pàgina HTTPS. Utilitzeu una adreça de servidor HTTPS.",
-  "server.connect.camera.insecure": "L'exploració de QR requereix obrir aquesta pàgina a HTTPS o a localhost.",
   "server.connect.camera.unavailable":
     "No hi ha cap càmera disponible per a aquest navegador. Introduïu els detalls de connexió manualment.",
   "server.connect.camera.error":

@@ -284,7 +284,6 @@ export const dict = {
   "dialog.directory.parent": "بالائی فولڈر",
   "dialog.directory.readError": "یہ فولڈر پڑھا نہیں جا سکا",
   "dialog.server.add.title": "سرور شامل کریں۔",
-  "dialog.server.add.url": "سرور کا پتہ",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "سرور سے منسلک نہیں ہو سکا",
   "dialog.server.add.checking": "چیک کر رہا ہے…",
@@ -800,11 +799,9 @@ export const dict = {
   "common.color.gray": "سرمئی",
   "mcp.auth.interactiveForm": "MCP سرور \u2068{{name}}\u2069 کو ایک انٹرایکٹو تصدیقی فارم درکار ہے۔",
   "server.connect.title": "سرور سے جڑیں۔",
-  "server.connect.description": "شروع کرنے کے لیے اپنا سرور ایڈریس اور پاس ورڈ درج کریں۔",
   "server.connect.button": "جڑیں۔",
   "server.connect.address.invalid": "ایک درست HTTP یا HTTPS سرور کا پتہ درج کریں۔",
   "server.connect.failed": "رابطہ نہیں ہو سکا۔ سرور کا پتہ اور پاس ورڈ چیک کریں، پھر دوبارہ کوشش کریں۔",
-  "server.connect.pair.description": "اپنے کنکشن کی تفصیلات حاصل کرنے کے لیے اس کمانڈ کو اپنے کمپیوٹر پر چلائیں۔",
   "server.connect.scan": "QR کوڈ اسکین کریں۔",
   "server.connect.scan.description": "اپنے کیمرے کو اوپن کوڈ پیئر کے ذریعے دکھائے گئے QR کوڈ کی طرف پوائنٹ کریں۔",
   "server.connect.scan.invalid":
@@ -813,7 +810,6 @@ export const dict = {
   "server.connect.camera.starting": "کیمرہ کھل رہا ہے…",
   "server.connect.mixedContent":
     "ایک HTTPS صفحہ سے اس HTTP سرور سے مربوط نہیں ہو سکا۔ اس کے بجائے ایک HTTPS سرور کا پتہ استعمال کریں۔",
-  "server.connect.camera.insecure": "QR اسکیننگ کے لیے اس صفحہ کو HTTPS پر یا لوکل ہوسٹ پر کھولنے کی ضرورت ہے۔",
   "server.connect.camera.unavailable":
     "اس براؤزر پر کوئی کیمرہ دستیاب نہیں ہے۔ اپنے کنکشن کی تفصیلات دستی طور پر درج کریں۔",
   "server.connect.camera.error":

@@ -275,7 +275,6 @@ export const dict = {
   "dialog.directory.parent": "Rodič",
   "dialog.directory.readError": "Tuto složku nelze přečíst",
   "dialog.server.add.title": "Přidat server",
-  "dialog.server.add.url": "Adresa serveru",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Nelze se připojit k serveru",
   "dialog.server.add.checking": "Kontrola…",
@@ -802,11 +801,9 @@ export const dict = {
   "common.color.gray": "šedá",
   "mcp.auth.interactiveForm": "Server MCP {{name}} vyžaduje interaktivní ověřovací formulář",
   "server.connect.title": "Připojit k serveru",
-  "server.connect.description": "Začněte zadáním adresy serveru a hesla.",
   "server.connect.button": "Připojit",
   "server.connect.address.invalid": "Zadejte platnou adresu serveru HTTP nebo HTTPS.",
   "server.connect.failed": "Připojení se nezdařilo. Zkontrolujte adresu serveru a heslo a zkuste to znovu.",
-  "server.connect.pair.description": "Spuštěním tohoto příkazu v počítači získáte údaje pro připojení.",
   "server.connect.scan": "Naskenovat QR kód",
   "server.connect.scan.description": "Namiřte kameru na QR kód zobrazený příkazem opencode pair.",
   "server.connect.scan.invalid": "Toto není párovací kód OpenCode. Naskenujte kód zobrazený příkazem opencode pair.",
@@ -814,7 +811,6 @@ export const dict = {
   "server.connect.camera.starting": "Otevírání kamery…",
   "server.connect.mixedContent":
     "K tomuto serveru HTTP se nelze připojit ze stránky HTTPS. Použijte adresu serveru HTTPS.",
-  "server.connect.camera.insecure": "Skenování QR kódu vyžaduje otevření této stránky přes HTTPS nebo na localhostu.",
   "server.connect.camera.unavailable":
     "Pro tento prohlížeč není dostupná žádná kamera. Zadejte údaje pro připojení ručně.",
   "server.connect.camera.error":

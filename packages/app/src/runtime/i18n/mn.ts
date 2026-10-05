@@ -276,7 +276,6 @@ export const dict = {
   "dialog.directory.parent": "Эцэг эх",
   "dialog.directory.readError": "Энэ фолдерыг унших боломжгүй байна",
   "dialog.server.add.title": "Сервер нэмэх",
-  "dialog.server.add.url": "Серверийн хаяг",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Сервертэй холбогдож чадсангүй",
   "dialog.server.add.checking": "Шалгаж байна…",
@@ -793,12 +792,9 @@ export const dict = {
   "common.color.gray": "саарал",
   "mcp.auth.interactiveForm": "MCP сервер {{name}} интерактив баталгаажуулах маягт шаарддаг",
   "server.connect.title": "Серверт холбогдох",
-  "server.connect.description": "Эхлэхийн тулд серверийн хаяг ба нууц үгээ оруулна уу.",
   "server.connect.button": "Холбох",
   "server.connect.address.invalid": "Хүчинтэй HTTP эсвэл HTTPS серверийн хаягийг оруулна уу.",
   "server.connect.failed": "Холбогдож чадсангүй. Серверийн хаяг ба нууц үгийг шалгаад дахин оролдоно уу.",
-  "server.connect.pair.description":
-    "Энэ командыг өөрийн компьютер дээр ажиллуулж, холболтын дэлгэрэнгүй мэдээллийг аваарай.",
   "server.connect.scan": "QR кодыг сканнердах",
   "server.connect.scan.description": "Камераа opencode pair-ийн харуулсан QR код руу чиглүүлнэ үү.",
   "server.connect.scan.invalid": "Энэ OpenCode холболтын код биш. opencode pair-ийн харуулсан кодыг уншуулна уу.",
@@ -806,7 +802,6 @@ export const dict = {
   "server.connect.camera.starting": "Камер нээж байна…",
   "server.connect.mixedContent":
     "HTTPS хуудсаас энэ HTTP серверт холбогдож чадсангүй. Үүний оронд HTTPS серверийн хаягийг ашигла.",
-  "server.connect.camera.insecure": "QR сканнердах нь энэ хуудасыг HTTPS дээр эсвэл localhost дээр нээх шаардлагатай.",
   "server.connect.camera.unavailable": "Энэ хөтчид камер байхгүй байна. Холболтын мэдээллээ гар аргаар оруулна уу.",
   "server.connect.camera.error":
     "Камерыг нээж чадсангүй. Камер ашиглахыг зөвшөөрөх эсвэл холболтын дэлгэрэнгүй мэдээллээ гараар оруулна уу.",

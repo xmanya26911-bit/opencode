@@ -329,7 +329,6 @@ export const dict = {
   "dialog.directory.readError": "Не вдалося прочитати цю папку",
 
   "dialog.server.add.title": "Додати сервер",
-  "dialog.server.add.url": "Адреса сервера",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Не вдалося підключитися до сервера",
   "dialog.server.add.checking": "Перевірка…",
@@ -881,11 +880,9 @@ export const dict = {
   "common.color.gray": "сірий",
   "mcp.auth.interactiveForm": "Сервер MCP {{name}} потребує інтерактивної форми автентифікації",
   "server.connect.title": "Підключитися до сервера",
-  "server.connect.description": "Введіть адресу сервера та пароль, щоб розпочати.",
   "server.connect.button": "Підключитися",
   "server.connect.address.invalid": "Введіть дійсну адресу сервера HTTP або HTTPS.",
   "server.connect.failed": "Не вдалося підключитися. Перевірте адресу сервера та пароль, потім повторіть спробу.",
-  "server.connect.pair.description": "Запустіть цю команду на своєму комп’ютері, щоб отримати дані підключення.",
   "server.connect.scan": "Сканувати QR-код",
   "server.connect.scan.description": "Наведіть камеру на QR-код, показаний opencode pair.",
   "server.connect.scan.invalid": "Це не код підключення OpenCode. Відскануйте код, показаний opencode pair.",
@@ -893,7 +890,6 @@ export const dict = {
   "server.connect.camera.starting": "Відкриваємо камеру…",
   "server.connect.mixedContent":
     "Не вдалося підключитися до цього HTTP-сервера з HTTPS-сторінки. Використайте адресу HTTPS-сервера.",
-  "server.connect.camera.insecure": "Сканування QR вимагає відкриття цієї сторінки через HTTPS або на localhost.",
   "server.connect.camera.unavailable": "У цьому веббраузері немає доступної камери. Введіть дані підключення вручну.",
   "server.connect.camera.error":
     "Не вдалося відкрити камеру. Дозвольте доступ до камери або введіть дані підключення вручну.",

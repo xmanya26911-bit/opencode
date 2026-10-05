@@ -300,7 +300,6 @@ export const dict = {
   "dialog.directory.parent": "starš",
   "dialog.directory.readError": "Te mape ni mogoče prebrati",
   "dialog.server.add.title": "Dodaj strežnik",
-  "dialog.server.add.url": "Naslov strežnika",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Ni bilo mogoče vzpostaviti povezave s strežnikom",
   "dialog.server.add.checking": "Preverjanje …",
@@ -810,12 +809,10 @@ export const dict = {
   "common.color.gray": "siva",
   "mcp.auth.interactiveForm": "MCP strežnik {{name}} zahteva interaktivni obrazec za overjanje",
   "server.connect.title": "Poveži se s strežnikom",
-  "server.connect.description": "Vnesite naslov strežnika in geslo za začetek.",
   "server.connect.button": "Poveži",
   "server.connect.address.invalid": "Vnesite veljaven HTTP ali HTTPS naslov strežnika.",
   "server.connect.failed":
     "Povezave ni bilo mogoče vzpostaviti. Preverite naslov strežnika in geslo ter poskusite znova.",
-  "server.connect.pair.description": "Za pridobitev podatkov o povezavi zaženite ta ukaz na svojem računalniku.",
   "server.connect.scan": "Skeniraj QR kodo",
   "server.connect.scan.description": "Usmerite kamero na QR kodo, ki jo prikaže opencode pair.",
   "server.connect.scan.invalid": "To ni OpenCode paritna koda. Skenirajte kodo, ki jo prikaže opencode pair.",
@@ -823,7 +820,6 @@ export const dict = {
   "server.connect.camera.starting": "Odpiranje kamere…",
   "server.connect.mixedContent":
     "Z HTTP strežnikom se ni mogoče povezati iz HTTPS strani. Uporabite HTTPS naslov strežnika.",
-  "server.connect.camera.insecure": "Skeniranje QR zahteva odpiranje te strani preko HTTPS ali na localhost.",
   "server.connect.camera.unavailable": "Brskalnik nima na voljo kamere. Vnesite podatke o povezavi ročno.",
   "server.connect.camera.error":
     "Kamer ne morem odpreti. Dovolite dostop do kamere ali vnesite podatke o povezavi ročno.",

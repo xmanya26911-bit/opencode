@@ -1,0 +1,55 @@
+/** How another device reaches this machine's server, which decides the label the pairing page shows. */
+export type RouteKind = "custom" | "local" | "vpn" | "other"
+
+/** An address another device can open, with the kind of network it travels over. */
+export type PairingRoute = { readonly url: string; readonly kind: RouteKind }
+
+const order: Record<RouteKind, number> = { custom: 0, local: 1, vpn: 2, other: 3 }
+
+/**
+ * The addresses a pairing link can use: the saved custom address first, then the server's advertised addresses that
+ * another device could reach. Loopback, wildcard and link-local addresses only work on this machine, so they drop out.
+ */
+export function pairingRoutes(urls: readonly string[], custom: string) {
+  const advertised = urls.flatMap((value): PairingRoute[] => {
+    const url = URL.parse(value)
+    const kind = url ? routeKind(url.hostname) : undefined
+
+    return url && kind ? [{ url: url.origin, kind }] : []
+  })
+
+  const routes: PairingRoute[] = custom ? [{ url: custom, kind: "custom" }, ...advertised] : advertised
+
+  return routes
+    .filter((route, index) => routes.findIndex((other) => other.url === route.url) === index)
+    .toSorted((a, b) => order[a.kind] - order[b.kind])
+}
+
+/**
+ * The origin of an address the user typed for other devices, or undefined when it is not one. Pairing links replace
+ * the path, so an address with a path, query, hash or credentials would send devices somewhere else.
+ */
+export function customAddress(value: string) {
+  const url = URL.parse(value.trim())
+
+  if (!url || (url.protocol !== "http:" && url.protocol !== "https:")) return
+
+  if (url.username || url.password || url.search || url.hash || url.pathname !== "/") return
+
+  return url.origin
+}
+
+function routeKind(hostname: string): RouteKind | undefined {
+  const host = hostname.replace(/^\[|\]$/g, "").toLowerCase()
+
+  if (host === "localhost" || host.endsWith(".localhost") || host === "::1" || host === "::") return
+
+  if (/^(127|0)\./.test(host) || host.startsWith("169.254.") || host.startsWith("fe80:")) return
+
+  // 100.64.0.0/10 is shared address space; on a computer it almost always belongs to Tailscale or another VPN.
+  if (/^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(host) || host.startsWith("fd7a:115c:a1e0:")) return "vpn"
+
+  if (/^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(host) || /^f[cd][0-9a-f]{2}:/.test(host)) return "local"
+
+  return "other"
+}

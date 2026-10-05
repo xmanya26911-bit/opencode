@@ -287,7 +287,6 @@ export const dict = {
   "dialog.directory.parent": "Foreldri",
   "dialog.directory.readError": "Get ekki lesið þessa möppu",
   "dialog.server.add.title": "Bæta við netþjóni",
-  "dialog.server.add.url": "Heimilisfang netþjóns",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "Gat ekki tengst þjóninum",
   "dialog.server.add.checking": "Athugar…",
@@ -778,11 +777,9 @@ export const dict = {
   "server.status.authentication": "Auðkenning krafist",
   "mcp.auth.interactiveForm": "MCP þjónn {{name}} krefst gagnvirks auðkenningareyðublaðs",
   "server.connect.title": "Tengstu við netþjón",
-  "server.connect.description": "Sláðu inn netþjóninn þinn og lykilorð til að byrja.",
   "server.connect.button": "Tengdu",
   "server.connect.address.invalid": "Sláðu inn gilt HTTP eða HTTPS netfang netþjóns.",
   "server.connect.failed": "Ekki tókst að tengjast. Athugaðu netfang netþjóns og lykilorð, reyndu svo aftur.",
-  "server.connect.pair.description": "Keyrðu þessa skipun á tölvunni þinni til að fá upplýsingar um tenginguna þína.",
   "server.connect.scan": "Skanna QR kóða",
   "server.connect.scan.description": "Beindu myndavélinni þinni að QR kóðanum sem opencode pair sýnir.",
   "server.connect.scan.invalid": "Þetta er ekki OpenCode pörunarkóði. Skannaðu kóðann sem opencode pair sýnir.",
@@ -790,7 +787,6 @@ export const dict = {
   "server.connect.camera.starting": "Opnar myndavél...",
   "server.connect.mixedContent":
     "Gat ekki tengst þessum HTTP netþjóni frá HTTPS síðu. Notaðu HTTPS netþjónsfang í staðinn.",
-  "server.connect.camera.insecure": "QR skönnun krefst þess að opna þessa síðu yfir HTTPS eða á localhost.",
   "server.connect.camera.unavailable":
     "Engin myndavél er í boði fyrir þennan vafra. Sláðu inn tengiupplýsingar þínar handvirkt.",
   "server.connect.camera.error":

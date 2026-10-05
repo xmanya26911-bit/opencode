@@ -278,7 +278,6 @@ export const dict = {
   "dialog.directory.parent": "දෙමාපිය",
   "dialog.directory.readError": "මෙම ෆෝල්ඩරය කියවීමට නොහැක",
   "dialog.server.add.title": "සේවාදායකය එක් කරන්න",
-  "dialog.server.add.url": "සේවාදායක ලිපිනය",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "සේවාදායකයට සම්බන්ධ වීමට නොහැකි විය",
   "dialog.server.add.checking": "පරීක්ෂා කරමින්…",
@@ -788,11 +787,9 @@ export const dict = {
   "common.color.gray": "අළු",
   "mcp.auth.interactiveForm": "MCP සේවාදායකය {{name}} සඳහා අන්තර්ක්‍රියාකාරී සත්‍යාපන පෝරමයක් අවශ්‍ය වේ",
   "server.connect.title": "සේවාදායකයකට සම්බන්ධ කරන්න",
-  "server.connect.description": "ආරම්භ කිරීමට ඔබගේ සේවාදායක ලිපිනය සහ මුරපදය ඇතුළත් කරන්න.",
   "server.connect.button": "සම්බන්ධ කරන්න",
   "server.connect.address.invalid": "වලංගු HTTP හෝ HTTPS සේවාදායක ලිපිනයක් ඇතුළත් කරන්න.",
   "server.connect.failed": "සම්බන්ධ වීමට නොහැකි විය. සේවාදායක ලිපිනය සහ මුරපදය පරීක්ෂා කර නැවත උත්සාහ කරන්න.",
-  "server.connect.pair.description": "ඔබගේ සම්බන්ධතා විස්තර ලබා ගැනීමට මෙම විධානය ඔබගේ පරිගණකයේ ක්‍රියාත්මක කරන්න.",
   "server.connect.scan": "QR කේතය පරිලෝකනය කරන්න",
   "server.connect.scan.description": "opencode pair මගින් පෙන්වන QR කේතය වෙත ඔබේ කැමරාව යොමු කරන්න.",
   "server.connect.scan.invalid":
@@ -801,7 +798,6 @@ export const dict = {
   "server.connect.camera.starting": "කැමරාව විවෘත කරමින්...",
   "server.connect.mixedContent":
     "මෙම HTTP සේවාදායකයට HTTPS පිටුවකින් සම්බන්ධ වීමට නොහැකි විය. ඒ වෙනුවට HTTPS සේවාදායක ලිපිනයක් භාවිතා කරන්න.",
-  "server.connect.camera.insecure": "QR ස්කෑන් කිරීම සඳහා මෙම පිටුව HTTPS හරහා හෝ localhost මත විවෘත කිරීම අවශ්‍ය වේ.",
   "server.connect.camera.unavailable": "මෙම බ්‍රවුසරයට කැමරාවක් නොමැත. ඔබගේ සම්බන්ධතා විස්තර අතින් ඇතුලත් කරන්න.",
   "server.connect.camera.error":
     "කැමරාව විවෘත කිරීමට නොහැකි විය. කැමරා ප්‍රවේශයට ඉඩ දෙන්න හෝ ඔබගේ සම්බන්ධතා විස්තර හස්තීයව ඇතුලත් කරන්න.",

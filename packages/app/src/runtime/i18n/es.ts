@@ -18,12 +18,10 @@ export const dict = {
   "server.status.authentication": "Se requiere autenticación",
   "mcp.auth.interactiveForm": "El servidor MCP {{name}} requiere un formulario de autenticación interactivo",
   "server.connect.title": "Conectarse a un servidor",
-  "server.connect.description": "Ingrese la dirección de su servidor y la contraseña para comenzar.",
   "server.connect.button": "Conectar",
   "server.connect.address.invalid": "Ingrese una dirección de servidor HTTP o HTTPS válida.",
   "server.connect.failed":
     "No se pudo conectar. Verifique la dirección y la contraseña del servidor y vuelva a intentarlo.",
-  "server.connect.pair.description": "Ejecute este comando en su computadora para obtener los detalles de su conexión.",
   "server.connect.scan": "Escanea el código QR",
   "server.connect.scan.description": "Apunte su cámara al código QR mostrado por opencode pair.",
   "server.connect.scan.invalid":
@@ -32,7 +30,6 @@ export const dict = {
   "server.connect.camera.starting": "Abriendo cámara...",
   "server.connect.mixedContent":
     "No se pudo conectar a este servidor HTTP desde una página HTTPS. Utilice una dirección de servidor HTTPS en su lugar.",
-  "server.connect.camera.insecure": "El escaneo de QR requiere abrir esta página en HTTPS o en localhost.",
   "server.connect.camera.unavailable":
     "No hay ninguna cámara disponible para este navegador. Ingrese los detalles de su conexión manualmente.",
   "server.connect.camera.error":
@@ -526,7 +523,6 @@ export const dict = {
   "dialog.directory.readError": "No se puede leer esta carpeta",
 
   "dialog.server.add.title": "Añadir un servidor",
-  "dialog.server.add.url": "URL del servidor",
   "dialog.server.add.placeholder": "http://localhost:4096",
   "dialog.server.add.error": "No se pudo conectar al servidor",
   "dialog.server.add.checking": "Comprobando…",
