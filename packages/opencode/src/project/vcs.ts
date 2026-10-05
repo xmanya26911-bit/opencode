@@ -240,6 +240,9 @@ export const Event = VcsEvent
 export const Info = Schema.Struct({
   branch: Schema.optional(Schema.String),
   default_branch: Schema.optional(Schema.String),
+  // Commits ahead of and behind the upstream tracking branch, absent when no upstream is configured.
+  ahead: Schema.optional(Schema.Finite),
+  behind: Schema.optional(Schema.Finite),
 }).annotate({ identifier: "VcsInfo" })
 export type Info = Schema.Schema.Type<typeof Info>
 
@@ -260,6 +263,8 @@ export const FileStatus = Schema.Struct({
   additions: Schema.Finite,
   deletions: Schema.Finite,
   status: Schema.Literals(["added", "deleted", "modified"]),
+  // Raw `git status --porcelain` code, e.g. "??" for untracked files.
+  code: Schema.optional(Schema.String),
 }).annotate({ identifier: "VcsFileStatus" })
 export type FileStatus = Schema.Schema.Type<typeof FileStatus>
 
@@ -278,10 +283,16 @@ export class PatchApplyError extends Schema.TaggedErrorClass<PatchApplyError>()(
   reason: Schema.Literals(["non-git", "not-clean"]),
 }) {}
 
+export type Tracking = {
+  readonly ahead: number | undefined
+  readonly behind: number | undefined
+}
+
 export interface Interface {
   readonly init: () => Effect.Effect<void>
   readonly branch: () => Effect.Effect<string | undefined>
   readonly defaultBranch: () => Effect.Effect<string | undefined>
+  readonly tracking: () => Effect.Effect<Tracking>
   readonly status: () => Effect.Effect<FileStatus[]>
   readonly diff: (mode: Mode, options?: DiffOptions) => Effect.Effect<FileDiff[]>
   readonly diffRaw: () => Effect.Effect<string>
@@ -345,6 +356,18 @@ const layer: Layer.Layer<Service, never, Git.Service | EventV2Bridge.Service> = 
       defaultBranch: Effect.fn("Vcs.defaultBranch")(function* () {
         return yield* InstanceState.use(state, (x) => x.root?.name)
       }),
+      tracking: Effect.fn("Vcs.tracking")(function* () {
+        const ctx = yield* InstanceState.context
+        if (ctx.project.vcs !== "git") return { ahead: undefined, behind: undefined }
+        const result = yield* git.run(["rev-list", "--left-right", "--count", "@{upstream}...HEAD"], {
+          cwd: ctx.directory,
+        })
+        if (result.exitCode !== 0) return { ahead: undefined, behind: undefined }
+        // `--left-right --count upstream...HEAD` prints "behind<TAB>ahead".
+        const [behind, ahead] = result.text().trim().split(/\s+/).map(Number)
+        if (!Number.isFinite(ahead) || !Number.isFinite(behind)) return { ahead: undefined, behind: undefined }
+        return { ahead, behind }
+      }),
       status: Effect.fn("Vcs.status")(function* () {
         const ctx = yield* InstanceState.context
         if (ctx.project.vcs !== "git") return []
@@ -366,6 +389,7 @@ const layer: Layer.Layer<Service, never, Git.Service | EventV2Bridge.Service> = 
                 additions: stat?.additions ?? 0,
                 deletions: stat?.deletions ?? 0,
                 status: item.status,
+                code: item.code,
               } satisfies FileStatus
             }),
         )
