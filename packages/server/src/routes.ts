@@ -130,14 +130,7 @@ function makeRoutes<AuthError, AuthServices>(
     ),
     InstructionDiscovery.node.replace(InstructionDiscovery.configured({ project: options.config?.project })),
     ShellSelect.node.replace(ShellSelect.configured({ gitbash: options.windows?.gitbash })),
-    Mcp.node.replace(
-      Mcp.configured({
-        clientInfo: {
-          name: options.app?.name ?? "opencode",
-          version: options.app?.version ?? "unknown",
-        },
-      }),
-    ),
+    Mcp.node.replace(Mcp.configured({ clientInfo: mcpClientInfo(options.app) })),
   ]
   const build = (overrides: LayerNode.Replacements) => {
     const replacements: LayerNode.Replacements = [
@@ -188,4 +181,12 @@ function makeRoutes<AuthError, AuthServices>(
       return Layer.merge(api, V1Migration.layer.pipe(Layer.provide(services)))
     }),
   )
+}
+
+// MCP servers key on clientInfo.name, so default to "opencode", not the app artifact. OPENCODE_CLIENT overrides.
+export function mcpClientInfo(app: ServerOptions["app"]) {
+  return {
+    name: process.env.OPENCODE_CLIENT ?? "opencode",
+    version: app?.version ?? "unknown",
+  }
 }
